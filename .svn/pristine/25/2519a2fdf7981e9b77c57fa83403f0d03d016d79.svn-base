@@ -1,0 +1,95 @@
+<div class="md-content md-padding">
+    <div layout="row" layout-wrap>
+        <div flex="100" flex-gt-md="100">
+           
+                <md-card-content>
+                    <form name="eventForm">
+                        <div layout="row" layout-xs="column">
+                            <div flex>
+                                <div layout="row" layout-xs="column">
+                                    <div class="calendar-page" flex>
+                                        <div class="margin-bottom-60" flex ui-calendar="vm.calendarOptions" ng-model="vm.eventSources" calendar="triangular-calendar" class="triangular-calendar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div flex class="margin-10">
+                                <div layout="row" layout-xs="column">
+                                    <div class='row'>
+                                        <md-button class="md-raised md-primary" aria-label="flat button" ng-click="vm.editOn()" ng-disabled="vm.editMode">Edit</md-button>
+                                        <md-button class="md-raised md-primary" aria-label="flat button" ng-click="vm.editOff()" ng-show="vm.editMode">Cancel</md-button>
+                                        <md-button class="md-raised md-primary" aria-label="flat button" ng-click="vm.save()" ng-show="vm.event.subject&&vm.event.numOfPe&&vm.event.startDate&&vm.event.endDate&&vm.editMode">Save</md-button>
+                                    </div>
+                                </div>
+                                <div layout="row" layout-xs="column">
+                                    <div flex class="margin-10">
+                                        <md-input-container class="md-block">
+                                            <label for="subject" translate>Subject</label>
+                                            <input ng-model="vm.event.subject" name="subject" ng-disabled="vm.editMode == false" required>
+                                            <div ng-messages="eventForm.subject.$error">
+                                                <div ng-message when="required"><span translate>Please enter a subject for the event.</span></div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-block">
+                                            <label for="subject" translate>Location</label>
+                                            <input ng-model="vm.event.location" name="number" ng-disabled="vm.editMode == false" required>
+                                            <div ng-messages="eventForm.number.$error">
+                                                <div ng-message when="required"><span translate>Please enter location</span></div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-block">
+                                            <label for="subject" translate>Number of participant</label>
+                                            <input ng-model="vm.event.numOfPe" name="number" ng-disabled="vm.editMode == false" required>
+                                            <div ng-messages="eventForm.number.$error">
+                                                <div ng-message when="required"><span translate>Please enter number of participant.</span></div>
+                                            </div>
+                                        </md-input-container>
+                                         <md-input-container class="md-block ">
+                                            <label>School</label>
+                                            <md-select ng-model="vm.event.school" placeholder="SCHOOL" ng-change="vm.getProgramList()" name="school" required>
+                                                <md-option ng-repeat="school in vm.schoolList" ng-value="{{school.schoolID}}">{{school.schoolName}}</md-option>
+                                            </md-select>
+                                            <div ng-messages for="signup.school.$error" md-auto-hide="false" ng-show="signup.school.$touched">
+                                                <div ng-message when="required">Please Choose Your School</div>
+                                            </div>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                 <div layout="row" layout-xs="column">
+                                <table>
+                                    <tr>
+                                        <div layout="row" layout-xs="column">
+                                            <td>
+                                                <div>
+                                                    <md-input-container class="md-block">
+                                                        <label translate>Start Date</label>
+                                                        <md-datepicker ng-model="vm.event.startDate" ng-disabled="vm.editMode == false" required></md-datepicker>
+                                                    </md-input-container>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div flex>
+                                                    <md-input-container class="md-block">
+                                                        <label translate>End Date</label>
+                                                        <md-datepicker ng-model="vm.event.endDate" ng-disabled="vm.editMode == false" required></md-datepicker>
+                                                    </md-input-container>
+                                                </div>
+                                            </td>
+                                        </div>
+                                    </tr>
+                                </table>
+                                </div>
+                                <div layout="row" layout-xs="column">
+                                    <div flex class="margin-10">
+                                        <md-input-container flex class="md-block">
+                                            <textarea name="eventBody" ng-show="vm.editMode" ng-model="vm.event.content" placeholder="Event Description"></textarea>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </md-card-content>
+           
+        </div>
+    </div>
+</div>

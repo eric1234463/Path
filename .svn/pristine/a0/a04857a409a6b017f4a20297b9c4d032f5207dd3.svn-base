@@ -1,0 +1,3 @@
+<div class="md-content md-padding">
+    <pdfjs-viewer ng-src="{{vm.note.noteLocation}}" download="false" print="false" open="false"></pdfjs-viewer>
+</div>

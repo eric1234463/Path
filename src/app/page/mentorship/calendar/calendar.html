@@ -1,0 +1,45 @@
+<div layout ="row" layout-xs="column" layout-align="space-between" class="margin-top-50 margin-left-30" style="width:45%;">
+<div><h2 class="font-weight-300 font-size-5 text-light" flex>{{vm.currentDay | amDateFormat:'MMMM YYYY'}}</h2></div>
+
+        <div>
+            <div class="md-toolbar-tools">
+        <md-button class=" md-icon-button" ng-click="vm.changeMonth('prev')" aria-label="previous month">
+            <md-icon md-font-icon="zmdi zmdi-chevron-left"></md-icon>
+        </md-button>
+        <md-button class=" md-icon-button" ng-click="vm.changeMonth('today')" aria-label="today">
+            <md-icon md-font-icon="zmdi zmdi-calendar-alt"></md-icon>
+        </md-button>
+        <md-button class=" md-icon-button" ng-click="vm.changeMonth('next')" aria-label="next month">
+            <md-icon md-font-icon="zmdi zmdi-chevron-right"></md-icon>
+        </md-button>
+            </div>
+        </div>
+</div>
+
+<div layout="row" layout-xs="column" layout-margin>
+    <div class="calendar-page" flex>
+        <div class="margin-bottom-60" flex ui-calendar="vm.calendarOptions" ng-model="vm.eventSources" calendar="triangular-calendar" class="triangular-calendar"></div>
+    </div>
+
+        <md-list flex>
+            <md-subheader>Appointment List</md-subheader>
+            <md-list-item class="md-3-line" ng-repeat="appoint in vm.appointList" ng-click="null">
+                <img ng-src="{{appoint.icon}}" class="md-avatar" />
+                <div class="md-list-item-text" layout="column">
+                    <p><b>Student Name:</b> {{appoint.name}}</p>
+                    <p>Appointment Date: {{appoint.date}}</p>
+                    <p>Appointment Time: {{appoint.time}}</p>
+                    <p>Message: {{appoint.msg}}</p>
+                </div>
+                <div layout-xs="column">
+                    <md-button class="md-raised md-accent" aria-label="flat button" ng-click="vm.accept(appoint.id)">Accept
+                        <md-icon md-font-icon="zmdi zmdi-check"></md-icon>
+                    </md-button>
+                    <md-button class="md-raised md-warn" aria-label="flat button"  ng-click="vm.reject(appoint.id)">Reject
+                        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                    </md-button>
+                </div>
+            </md-list-item>
+        </md-list>
+
+</div>

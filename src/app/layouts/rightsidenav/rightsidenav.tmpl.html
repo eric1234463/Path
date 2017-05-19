@@ -1,0 +1,28 @@
+<md-content flex layout class="admin-notifications">
+    <md-tabs flex md-stretch-tabs="always" md-selected="vm.currentTab">
+        <md-tab>
+            <md-tab-label>
+                <md-icon md-font-icon="zmdi zmdi-info-outline"></md-icon>
+            </md-tab-label>
+            <md-tab-body>
+                <md-content>
+                    <md-list>
+                        <div ng-repeat="group in vm.currentUser.notificationGroup">
+                            <md-subheader class="md-primary">{{::group.name}}</md-subheader>
+                            <md-list-item ng-repeat="notification in ::group.notifications" ng-if="notification.read == false" layout="row" layout-align="space-between center" href='{{notification.path}}' palette-background="blue:200" ng-click='vm.read(notification)'>
+                                <md-icon md-font-icon="zmdi zmdi-notifications" style="color: #FFEB3B"></md-icon>
+                                <p style="white-space: pre-wrap;">{{notification.title}}</p>
+                                <span class="md-caption" am-time-ago="notification.date"></span>
+                            </md-list-item>
+                            <md-list-item ng-repeat="notification in ::group.notifications" ng-if="notification.read == true" layout="row" layout-align="space-between center" href='{{notification.path}}'>
+                                <md-icon md-font-icon="zmdi zmdi-notifications-none" ></md-icon>
+                                <p style="white-space: pre-wrap;">{{notification.title}}</p>
+                                <span class="md-caption" am-time-ago="notification.date"></span>
+                            </md-list-item>
+                        </div>
+                    </md-list>
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+    </md-tabs>
+</md-content>

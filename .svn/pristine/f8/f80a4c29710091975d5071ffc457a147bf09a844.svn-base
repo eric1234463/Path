@@ -1,0 +1,56 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.study')
+        .config(moduleConfig);
+
+    /* @ngInject */
+    function moduleConfig($stateProvider, triMenuProvider) {
+
+        $stateProvider
+            .state('triangular.timeline', {
+                url: '/timeline',
+                data: {
+                    permissions: {
+                        only: ['study']
+                    }
+                },
+                templateUrl: 'app/page/study/timeline/timeline.html',
+                controller: 'TimelineController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.messaging', {
+                url: '/messaging',
+                data: {
+                    permissions: {
+                        only: ['study']
+                    }
+                },
+                templateUrl: 'app/page/study/messaging/messaging.html',
+                controller: 'MessagingController',
+                controllerAs: 'vm'
+            });
+
+        triMenuProvider.addMenu({
+            name: 'Prepare For Study',
+            icon: 'fa fa-book',
+            type: 'dropdown',
+            priority: 2,
+            permission: 'study',
+            children: [{
+                name: 'Non-JUPAS Timeline',
+                icon: 'zmdi zmdi-time',
+                state: 'triangular.timeline',
+                type: 'link'
+            },
+
+            {
+                name: 'Messaging',
+                icon: 'zmdi zmdi-account-box-o',
+                state: 'triangular.messaging',
+                type: 'link'
+            }]
+        });
+    }
+})();

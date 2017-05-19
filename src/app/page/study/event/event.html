@@ -1,0 +1,38 @@
+<md-toolbar md-scroll-shrink ng-if="true" flex-offset="5" id="toolbar">
+    <div class="md-toolbar-tools">
+        <h5 style="font-weight: 700; color: #777777;">
+        <span>Up Coming Events</span>
+      </h5>
+    </div>
+</md-toolbar>
+<div layout="column" layout-xs="column">
+    <div ng-repeat="act in vm.acts">
+        <md-card layout="row" layout-xs="column" layout-sm="column" layout-align="space-around" flex-offset="10" id="card">
+            <div layout="column" layout-xs="row" layout-sm="row" layout-align="space-around center" id="left">
+                <span class="md-subhead">{{act.startDate | date:'MMM'}}<hr/></span>
+                <span class="md-display-1" style="font-weight: 700; color: #777777">{{act.startDate | date:'dd'}}</span>
+                <span class="md-subhead">{{act.endDate | date:'MMM'}}<hr/></span>
+                <span class="md-display-1" style="font-weight: 700; color: #777777">{{act.endDate | date:'dd'}}</span>
+            </div>
+            <div id="photo" flex="30" flex-xs="100" flex-sm="100">
+                <img flex-xs="100" style="width: 100%; min-height: 80%;" src="{{act.pic}}" alt="Card Image">
+            </div>
+            <div flex="50" flex-xs="80" flex-sm="80" layout="column" layout-align="space-around center" id="left">
+                <span class="md-headline" ng-hide={{act.status}} style="color: #FF673D">( CLOSED )</span>
+                <span class="md-headline" style="font-weight: 600; color: #777777">{{act.subject}}</span>
+                <span class="md-subhead" style="font-weight: 500;color: #FF673D">No. of Participants: {{act.count}} / {{act.participant}}</span>
+                <br/>
+                <span hide-xs class="md-subhead">{{act.description}}</span>
+                <span><hr/></span>
+                <md-card-actions layout="row" layout-align="end">
+                    <md-button ng-if=!act.status ng-hide=vm.bool href="/#/GrpResult/{{act.activityID}}">See My Grouping Result</md-button>
+                    <hr/>
+                    <md-button>Event Details</md-button>
+                    <hr/>
+                    <md-button ng-if=act.status ng-show=vm.bool class="md-warn" ng-click="vm.form(act.activityID)">Close event application</md-button>
+                    <md-button class="md-primary" ng-hide=vm.bool ng-disabled={{act.joined}} ng-click="vm.join(act.activityID)" ng-if=act.status >Join Event</md-button>
+                </md-card-actions>
+            </div>
+        </md-card>
+    </div>
+</div>

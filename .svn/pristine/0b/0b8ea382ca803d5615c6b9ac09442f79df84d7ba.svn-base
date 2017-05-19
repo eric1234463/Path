@@ -1,0 +1,38 @@
+<md-content class="md-padding full-width">
+    <md-card>
+        <tri-widget flex class="widget-chat" title="Chat" content-layout="column" content-layout-align="space-between">
+            <md-divider></md-divider>
+            <md-list class="padding-top-20 padding-bottom-10">
+                <div ng-repeat="x in vm.chatList" flex>
+                    <md-list-item ng-if="x.SenderId !== vm.currentUser.accountID" class="md-3-line user-left" ng-init="userColor = 'cyan'">
+                        <img class="md-avatar" ng-src="{{x.AccountIcon}}" alt="{{::chat.name}}">
+                        <div class="md-list-item-text">
+                            <p palette-background="{{::userColor}}:200">
+                                {{::x.Message}}
+                            </p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item ng-if="x.SenderId === vm.currentUser.accountID" class="md-3-line user-right" ng-init="userColor = 'light-green'">
+                        <img class="md-avatar" ng-src="{{x.AccountIcon}}" alt="{{::chat.name}}">
+                        <div class="md-list-item-text">
+                            <p palette-background="{{::userColor}}:200">
+                                {{::x.Message}}
+                            </p>
+                        </div>
+                    </md-list-item>
+                </div>
+            </md-list>
+            <div layout="row" layout-align="space-between center">
+                <md-input-container flex class="margin-top-60 margin-left-20">
+                    <label>Message</label>
+                    <form ng-submit="vm.sendMessage()">
+                    <input type="text" ng-model="::vm.textMessage">
+                    </form>
+                </md-input-container>
+                <md-button class="md-fab" aria-label="Send Message" ng-click="vm.sendMessage();">
+                    <md-icon class="margin-left-9" md-svg-src="assets/images/send.svg"></md-icon>
+                </md-button>
+            </div>
+        </tri-widget>
+    </md-card>
+</md-content>

@@ -1,0 +1,52 @@
+(function() {
+    'use strict';
+
+    angular.module('app.main.study')
+        .controller('ChatController', ChatController);
+
+    /* @ngInject */
+    function ChatController (StudyService, AccountService, $localStorage, $state, returnChat, accountImg, $stateParams) {
+        var vm = this;
+        vm.currentUser = $localStorage.currentUser;
+        vm.baseState = $state.current;
+        vm.returnChat = returnChat;
+        vm.returnUrl = accountImg;
+
+        StudyService.getMessage(returnChat).then(function(response) {
+            vm.chatList = response.data;
+        });
+
+        // returns back to email list
+        vm.userClass = function($even, id) {
+                if($even) {
+                    if(id == vm.currentUser.accountID) {
+                        return 'user-right';
+                    }
+                    else {
+                        return 'user-left';
+                    }
+                }
+                else {
+                    if(id == vm.currentUser.accountID) {
+                        return 'user-right';
+                    }
+                    else {
+                        return 'user-left';
+                    }
+                }
+            };
+
+        vm.getImage = function(id) {
+            if(id == vm.currentUser.accountID) {
+                return vm.currentUser.accountIcon;
+            }
+
+            else {
+                return vm.returnUrl;
+            }
+        };
+
+        
+     }
+    
+})();

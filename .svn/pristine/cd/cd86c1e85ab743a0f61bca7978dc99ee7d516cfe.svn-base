@@ -1,0 +1,115 @@
+<?php
+require ("dbconn.php");
+session_start();
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+$dbconn = dbconn();
+if (!$dbconn) {
+    die("dbconnection failed: " . mysqli_dbconnect_error());
+} 
+else {
+	$action = $_GET['action'];
+	$data = Array();
+	switch ($action) {
+		case 'getChatMessage':
+			$sql = "SELECT * FROM ChatMessage";
+			$result = mysqli_query($dbconn, $sql);
+			while ($row = mysqli_fetch_assoc($result)) {
+				$data[] = array(
+						'ChatId' => $row['chatID'],
+						'MessageId' => $row['messageID'],
+						'SenderId' => $row['senderAccountID'],
+						'ReceiverId' => $row['receieverAccountID'],
+						'Message' => $row['message']
+					);
+			};
+			echo json_encode($data);
+			break;
+
+
+		case 'getChatRoom':
+			$sql = "SELECT * FROM ChatRoom";
+			$result = mysqli_query($dbconn, $sql);
+			while ($row = mysqli_fetch_assoc($result)) {
+				$data[] = array(
+						'ChatId' => $row['chatID'],
+						'SenderId' => $row['senderAccountID'],
+						'ReceiverId' => $row['receieverAccountID']
+					);
+			};
+			echo json_encode($data);
+			break;
+
+		case 'getMessage':
+		$sql = "SELECT * FROM ChatRoom a LEFT JOIN ChatMessage b ON a.chatID = b.chatID";
+		$result = mysqli_query($dbconn, $sql);
+		while ($row = mysqli_fetch_assoc($result)) {
+				$data[] = array(
+						'ChatId' => $row['chatID'],
+						'MessageId' => $row['messageID'],
+						'SenderId' => $row['senderAccountID'],
+						'ReceiverId' => $row['receieverAccountID'],
+						'Message' => $row['message']
+					);
+		};
+		echo json_encode($data);
+		break;
+
+		case 'testMessage':
+		$accountID = $_GET['accountID'];
+		$sql = "SELECT * FROM ChatMessage WHERE senderAccountID = $accountID";
+		$result = mysqli_query($dbconn, $sql);
+		while ($row = mysqli_fetch_assoc($result)) {
+				$data[] = array(
+						'ChatId' => $row['chatID'],
+						'MessageId' => $row['messageID'],
+						'SenderId' => $row['senderAccountID'],
+						'ReceiverId' => $row['receieverAccountID'],
+						'Message' => $row['message'],
+						'MessageTime' => $row['messageTime']
+					);
+		};
+		echo json_encode($data);
+		break;
+
+		case 'getContactList':
+		$accountID = $_GET['accountID'];
+		$sql = "SELECT * FROM ChatMessage INNER JOIN Account WHERE ChatMessage.senderAccountID=$accountID AND Account.accountID=ChatMessage.senderAccountID ORDER BY ChatMessage.chatID";
+		$result = mysqli_query($dbconn, $sql);
+		while ($row = mysqli_fetch_assoc($result)) {
+				$data[] = array(
+						'ChatId' => $row['chatID'],
+						'MessageId' => $row['messageID'],
+						'SenderId' => $row['senderAccountID'],
+						'Message' => $row['message'],
+						'MessageTime' => $row['messageTime'],
+						'AccountName' => $row['accountName'],
+						'AccountIcon' => $row['accountIcon']
+					);
+		};
+		echo json_encode($data);
+		break;
+
+		case 'getContacts':
+		$accountID = $_GET['accountID'];
+		$sql = "SELECT * FROM ChatRoom INNER JOIN Account WHERE (ChatRoom.firstUser=$accountID OR ChatRoom.secondUser=$accountID) AND (Account.accountID=ChatRoom.firstUser OR Account.accountID=ChatRoom.secondUser)";
+		$result = mysqli_query($dbconn, $sql);
+		while ($row = mysqli_fetch_assoc($result)) {
+				$data[] = array(
+						'ChatId' => $row['chatID'],
+						'FirstUser' => $row['firstUser'],
+						'secondUser' => $row['secondUser'],
+						'AccountName' => $row['accountName'],
+						'AccountIcon' => $row['accountIcon']
+					);
+		};
+		echo json_encode($data);
+		break;
+
+
+	}
+}
+mysqli_close($dbconn);
+
+
+?>

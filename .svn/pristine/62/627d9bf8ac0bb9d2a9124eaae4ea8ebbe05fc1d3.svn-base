@@ -1,0 +1,14 @@
+(function() {
+    'use strict';
+    angular
+        .module('app.main.live')
+        .controller('ViewChoiceController', ViewChoiceController);
+
+    function ViewChoiceController(LiveService) {
+        var vm = this;
+        LiveService.getChoiceList().then(function(response) {
+            vm.schoolList = response.data;
+            console.log(vm.schoolList);
+        });
+    }
+})();

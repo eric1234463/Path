@@ -1,0 +1,51 @@
+<div class="md-content md-padding">
+    <md-tabs class="md-primary" md-selected="selectedTabIndex" id="case">
+        <md-tab ng-repeat="school in vm.schoolList" label="{{school.SchoolName}}" aria-label="{{school.SchoolName}}">
+            <md-toolbar class="md-table-toolbar md-default">
+                <div class="md-toolbar-tools">
+                    <span translate>{{school.SchoolName}}</span>
+                </div>
+            </md-toolbar>
+            <!-- exact table from live demo -->
+            <md-table-container id="case">
+                <table md-table>
+                    <thead md-head>
+                        <tr md-row>
+                            <th md-column mdDesc="{{case.Category}}"><span>Category</span></th>
+                            <th md-column mdDesc="{{case.offerDate}}"><span>Date of offer</span></th>
+                            <th md-column >Sub-degree Programme</th>
+                            <th md-column >Offered<br>University</th>
+                            <th md-column >Offered Programme</th>
+                            <th md-column >DSE<br>FullCert</th>
+                            <th md-column >Year 1<br>Semester 1</th>
+                            <th md-column >Year 1<br>Semester 2</th>
+                            <th md-column >Year 2<br>Semester 1</th>
+                            <th md-column >Year 2<br>Semester 2</th>
+                            <th md-column >CGPA</th>
+                            <th md-column >ITELTS</th>
+                            <th md-column md-numeric>OfferType</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row md-select="case" md-auto-select ng-repeat="case in school.CaseList">
+                            <td md-cell translate>{{case.Category}}</td>
+                            <td md-cell>{{case.offerDate}}</td>
+                            <td md-cell>{{case.ProgrammeName}}</td>
+                            <td md-cell translate>{{case.OfferUniversity}}</td>
+                            <td md-cell>{{case.OfferProgramme}}</td>
+                            <td md-cell>{{case.DSEFullCert}}</td>
+                            <td md-cell>{{case.sem1GPA}}</td>
+                            <td md-cell>{{case.sem1GPA}}</td>
+                            <td md-cell>{{case.sem1GPA}}</td>
+                            <td md-cell>{{case.sem1GPA}}</td>
+                            <td md-cell>{{case.CGPA}}</td>
+                            <td md-cell>{{case.itelts}}</td>
+                            <td md-cell>{{case.offerType}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+
+        </md-tab>
+    </md-tabs>
+</div>

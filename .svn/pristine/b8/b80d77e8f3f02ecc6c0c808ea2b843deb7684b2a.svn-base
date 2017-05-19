@@ -1,0 +1,40 @@
+<md-content class="md-padding full-width">
+    <md-card>
+        <md-card-header>
+            <md-card-avatar>
+                <img class="md-user-avatar" ng-src="{{::vm.email.from.image}}"/>
+            </md-card-avatar>
+            <md-card-header-text>
+                <span class="md-title">{{::vm.email.from.name}}</span>
+            </md-card-header-text>
+            <md-card-icon-actions>
+                <md-button class="md-icon-button" aria-label="close" ng-click="vm.closeEmail()">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </md-card-icon-actions>
+        </md-card-header>
+        <md-divider></md-divider>
+        <md-card-content>
+            <tri-widget chat-widget flex class="widget-chat" title="Chat" content-layout="column" content-layout-align="space-between">
+                <md-divider></md-divider>
+                <md-list class="padding-top-20 padding-bottom-0" flex>
+                    <md-list-item ng-repeat="data in ::vm.data" class="md-3-line" ng-class="userClass($even)" ng-init="userColor = $even ? 'cyan' : 'light-green'">
+                        <img class="md-avatar" ng-src="{{::chat.image}}" alt="{{::chat.name}}">
+                        <div class="md-list-item-text">
+                            <p palette-background="{{::userColor}}:200" ng-repeat="message in ::vm.message">
+                                {{::data.Message}}
+                            </p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <div layout="row" layout-align="space-between center">
+                    <md-input-container flex class="margin-left-20 margin-right-20">
+                        <label>Message</label>
+                        <input type="text">
+                    </md-input-container>
+                </div>
+            </tri-widget>
+        </md-card-content>
+        <md-divider></md-divider>
+    </md-card>
+</md-content>

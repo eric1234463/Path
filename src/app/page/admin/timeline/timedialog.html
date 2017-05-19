@@ -1,0 +1,40 @@
+<md-dialog class="mobile-fullwidth-dialog" flex="60" flex-xs="100">
+    <md-toolbar class="toolbar-default" ng-style="{ 'background-color': vm.selectedColor.backgroundColor, color: vm.selectedColor.textColor }">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span translate>Create Event</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancelClick()" aria-label="cancel">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-divider></md-divider>
+    <md-dialog-content class="md-dialog-content">
+        <form class="event-dialog-form" name="eventForm">
+            <md-input-container class="md-block">
+                <label translate>Event Name</label>
+                <input type="text" ng-model="vm.newEvent.eventName" required>
+                <div ng-messages="schoolForm.eventDetail.$error" md-auto-hide="false" ng-show="schoolForm.eventDetail.$touched">
+                    <div ng-message when="required"><span>Please enter your eventDetail.</span></div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label translate>Event Description</label>
+                <input type="text" ng-model="vm.newEvent.eventDetail" required>
+                <div ng-messages="schoolForm.eventDetail.$error" md-auto-hide="false" ng-show="schoolForm.eventDetail.$touched">
+                    <div ng-message when="required"><span>Please enter your eventDetail.</span></div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label translate>Event Date</label>
+                <md-datepicker ng-model="vm.newEvent.eventDate" required></md-datepicker>
+            </md-input-container>
+        </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button ng-click="vm.cancelClick()" translate="Cancel"></md-button>
+        <md-button ng-click="vm.okClick()" class="md-primary" ng-disabled="eventForm.$invalid" aria-label="{{vm.dialogData.confirmButtonText | triTranslate}}" translate="Create"></md-button>
+    </md-dialog-actions>
+</md-dialog>

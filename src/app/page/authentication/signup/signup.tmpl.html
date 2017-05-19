@@ -1,0 +1,145 @@
+<div flex layout="row" layout-align="center center" layout-fill>
+    <md-card flex="90" class="tri-wizard-card md-whiteframe-z5" tri-wizard>
+     <form name="signup">
+        <md-toolbar class="text-center md-primary">
+            <img ng-src="{{::vm.triSettings.logo}}" alt="{{vm.triSettings.name}}">
+            <h1 class="md-headline">Path</h1>
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <h2>Sign Up Form</h2>
+                <h2>{{vm.progress}}% <span translate>Complete</span></h2>
+            </div>
+            <md-progress-linear class="md-accent padding-bottom-10" md-mode="determinate" ng-value="vm.progress"></md-progress-linear>
+        </md-toolbar>
+        <md-card-content>
+                <md-tabs class="md-primary" layout-fill md-selected="vm.currentStep" md-dynamic-height>
+                        <md-tab id="address" ng-disabled="vm.currentStep != 0">
+                            <md-tab-label>
+                                <span class="oxy-step-label">1</span>
+                                <span translate>School Information</span>
+                            </md-tab-label>
+                            <md-tab-body>
+                                <md-content class="md-padding">
+                                        <md-input-container class="md-block ">
+                                            <label>School</label>
+                                            <md-select ng-model="vm.user.school" placeholder="SCHOOL" ng-change="vm.getProgramList()" name="school" required>
+                                                <md-option ng-repeat="school in vm.schoolList" ng-value="{{school.schoolID}}">{{school.schoolName}}</md-option>
+                                            </md-select>
+                                            <div ng-messages for="signup.school.$error" md-auto-hide="false" ng-show="signup.school.$touched">
+                                                <div ng-message when="required">Please Choose Your School</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-block ">
+                                            <label>Program</label>
+                                            <md-select placeholder="Program" ng-model="vm.user.program" name="program" ng-disabled="vm.user.school == 0" required>
+                                                <md-option ng-repeat="program in vm.programList" ng-value="{{program.programID}}"> {{program.programName}}</md-option>
+                                            </md-select>
+                                            <div ng-messages for="signup.program.$error" md-auto-hide="false" ng-show="signup.program.$touched">
+                                                <div ng-message when="required">Please Choose Your Program</div>
+                                            </div>
+                                        </md-input-container>
+                                </md-content>
+                            </md-tab-body>
+                        </md-tab>
+                        <md-tab id="billing" ng-disabled="vm.currentStep != 1">
+                            <md-tab-label>
+                                <span class="oxy-step-label">2</span>
+                                <span translate>School Email Detail</span>
+                            </md-tab-label>
+                            <md-tab-body>
+                                <md-content class="md-padding">
+                                    <md-input-container class="md-block ">
+                                        <label for="email" name="email">Local Email Path</label>
+                                        <md-icon md-font-icon="zmdi zmdi-email"></md-icon>
+                                        <input ng-change="vm.emailTyping()" id="email" label="email" name="email" type="text" ng-model="vm.user.emailpath" required/>
+                                        <div ng-messages="signup.email.$error" md-auto-hide="false" ng-show="signup.email.$touched">
+                                            <div ng-message="required">Please enter your local email path</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-block ">
+                                        <label for="email ">School Email</label>
+                                        <md-icon md-font-icon="zmdi zmdi-email"></md-icon>
+                                        <input id="email " label="email " name="email" type="text" ng-model="vm.user.email" disabled="ture" />
+                                    </md-input-container>
+                                </md-content>
+                            </md-tab-body>
+                        </md-tab>
+                        <md-tab id="account" ng-disabled="vm.currentStep != 2">
+                            <md-tab-label>
+                                <span class="oxy-step-label">3</span>
+                                <span translate>Account Detail</span>
+                            </md-tab-label>
+                            <md-tab-body>
+                                <md-content class="md-padding">
+                                    <md-input-container class="md-block" md-no-float>
+                                        <label for="name" name="name">Username</label>
+                                        <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
+                                        <input id="name" label="name" name="name" type="text" ng-model="vm.user.name" ng-blur="vm.checkAccount()" required/>
+                                        <div ng-messages="signup.name.$error" md-auto-hide="false" ng-show="signup.name.$touched">
+                                            <div ng-message="required">Please enter your name</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-block ">
+                                        <label for="password" name="password">password</label>
+                                        <md-icon md-font-icon="zmdi zmdi-key"></md-icon>
+                                        <input id="password" label="password" name="password" type="password" ng-model="vm.user.password" ng-minlength="8" tri-same-password="signup.confirm" required/>
+                                        <div ng-messages="signup.password.$error" md-auto-hide="false" ng-show="signup.password.$touched">
+                                            <div ng-message="required">Please enter a password</div>
+                                            <div ng-message="minlength">Your password must be greater than 8 characters long</div>
+                                            <div ng-message="samePassword">You need to enter the same password</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-block ">
+                                        <label for="password">confirm password</label>
+                                        <md-icon md-font-icon="zmdi zmdi-key"></md-icon>
+                                        <input id="confirm" label="confirm" name="confirm" type="password" ng-model="vm.user.confirm" tri-same-password="signup.password" ng-minlength="8" required/>
+                                        <ng-messages for="signup.confirm.$error" md-auto-hide="false" ng-show="signup.confirm.$touched">
+                                            <div ng-message when="required">
+                                                <span>Please enter a password</span>
+                                            </div>
+                                            <div ng-message when="minlength">
+                                                <span>Your password must be greater than 8 characters long</span>
+                                            </div>
+                                            <div ng-message when="samePassword">
+                                                <span>You need to enter the same password</span>
+                                            </div>
+                                        </ng-messages>
+                                    </md-input-container>
+                                    <md-input-container class="md-block ">
+                                        <label for="pin" name="pin">Pin Code</label>
+                                        <md-icon md-font-icon="zmdi zmdi-pin"></md-icon>
+                                        <input id="pin" label="Pin Code" name="pin" ng-model="vm.user.pin" ng-maxlength="4" ng-minlength="4" required/>
+                                        <div ng-messages="signup.pin.$error" md-auto-hide="false" ng-show="signup.pin.$touched">
+                                            <div ng-message="required">Please enter your PinCode</div>
+                                            <div ng-message when="maxlength">Your PinCode must be 4 characters long</div>
+                                            <div ng-message when="minlength">Your PinCode must be 4 characters long</div>
+                                        </div>
+                                    </md-input-container>
+                                </md-content>
+                            </md-tab-body>
+                        </md-tab>
+                    <md-tab id="confirm" ng-disabled="vm.currentStep != 3">
+                        <md-tab-label>
+                            <span class="oxy-step-label">4</span>
+                            <span translate>Confirmation</span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-content class="md-padding">
+                                <div class="padding-40" flex layout="column" layout-align="center center">
+                                    <md-icon class="big-icon" md-font-icon="zmdi zmdi-cake"></md-icon>
+                                    <h2 class="md-display-2" translate>Congratulations - Account is created successfully!!</h2>
+                                </div>
+                            </md-content>
+                        </md-tab-body>
+                    </md-tab>
+                </md-tabs>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-click="vm.back()" ng-if="vm.currentStep == 0">Landing Page</md-button>
+            <md-button class="md-primary md-raised" ng-click="vm.prevStep()" ng-if="vm.currentStep > 0&&vm.currentStep < 3">Previous</md-button>
+            <md-button class="md-primary md-raised" ng-click="vm.sendMail()" ng-disabled="!vm.user.emailpath" ng-if="vm.currentStep == 1">Send Pin Code</md-button>
+            <md-button class="md-primary md-raised" ng-click="vm.nextStep()" ng-if="vm.currentStep == 0" ng-disabled="vm.user.program == 0">Next</md-button>
+            <md-button class="md-primary md-raised" ng-click="vm.createAccount()" ng-if="vm.currentStep == 2" ng-disabled="signup.$invalid||(vm.user.pin!=vm.user.pinCode)||(vm.user.status==1)">Sign Up</md-button>
+        </md-card-actions>
+           </form>
+    </md-card>
+</div>

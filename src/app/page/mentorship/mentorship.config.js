@@ -1,0 +1,150 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.mentorship')
+        .config(moduleConfig);
+
+    /* @ngInject */
+    function moduleConfig($stateProvider, triMenuProvider) {
+
+        $stateProvider
+            .state('triangular.choose', {
+                url: '/ChooseYourMentor',
+                data: {
+                    permissions: {
+                        only: ['mentorship']
+                    }
+                },
+                templateUrl: 'app/page/mentorship/choose/choose.html',
+                controller: 'ChooseController',
+                controllerAs: 'vm'
+            })
+
+            .state('triangular.mentorProfile', {
+                url: '/MentorProfile',
+                data: {
+                    permissions: {
+                        only: ['mentorship']
+                    }
+                },
+                templateUrl: 'app/page/mentorship/mentor_profile/mentor_profile.html',
+                controller: 'MentorProfileController',
+                controllerAs: 'vm'
+            })
+            
+        .state('triangular.appointment', {
+            url: '/Appointment',
+                data: {
+                    permissions: {
+                        only: ['mentorship']
+                    }
+                },
+            templateUrl: 'app/page/mentorship/appointment/appointment.html',
+            controller: 'AppointmentController',
+            controllerAs: 'vm'
+        })
+
+        .state('triangular.meeting', {
+            url: '/Meeting',
+                data: {
+                    permissions: {
+                        only: ['mentorship']
+                    }
+                },
+            templateUrl: 'app/page/mentorship/meeting/meeting.html',
+            controller: 'MeetingController',
+            controllerAs: 'vm'
+        })
+
+        .state('triangular.uploadnote', {
+            url: '/Uploadnote',
+                data: {
+                    permissions: {
+                        only: ['mentorship']
+                    }
+                },
+            templateUrl: 'app/page/mentorship/uploadnote/uploadnote.html',
+            controller: 'UploadNoteController',
+            controllerAs: 'vm'
+        })
+
+        .state('triangular.viewnote', {
+            url: '/Viewnote',
+                data: {
+                    permissions: {
+                        only: ['mentorship']
+                    }
+                },
+            templateUrl: 'app/page/mentorship/viewnote/viewnote.html',
+            controller: 'ViewNoteController',
+            controllerAs: 'vm'
+        })
+
+
+        .state('triangular.calendar', {
+            url: '/Calendar',
+                data: {
+                    permissions: {
+                        only: ['mentorship']
+                    },layout: {
+                    contentClass: 'triangular-non-scrolling layout-column',
+                    }
+                },
+                templateUrl: 'app/page/mentorship/calendar/calendar.html',
+                controller: 'CalendarController',
+                controllerAs: 'vm'
+        });
+
+        triMenuProvider.addMenu({
+            name: 'Mentorship',
+            icon: 'zmdi zmdi-accounts',
+            permission: 'mentorship',
+            type: 'dropdown',
+            priority: 5,
+            children: [{
+                name: 'Choose Your Mentor',
+                icon: 'zmdi zmdi-account-box-o',
+                permission: 'choose your mentor',
+                state: 'triangular.choose',
+                type: 'link'
+            },{
+                name: 'View Mentor Notes',
+                icon: 'zmdi zmdi-share',
+                permission: 'view mentor notes',
+                state: 'triangular.viewnote',
+                type: 'link'
+            },{
+                name: 'Upload Mentor Notes',
+                icon: 'zmdi zmdi-cloud-upload',
+                permission: 'upload mentor notes',
+                state: 'triangular.uploadnote',
+                type: 'link'
+            },{
+                name: 'Mentor Profile',
+                icon: 'zmdi zmdi-account-box-o',
+                permission: 'mentor profile',
+                state: 'triangular.mentorProfile',
+                type: 'link'
+            },{
+                name: 'Make Appointment',
+                icon: 'zmdi zmdi-assignment',
+                permission: 'make appointment',
+                state: 'triangular.appointment',
+                type: 'link'
+            },{
+                name: 'Meeting',
+                icon: 'zmdi zmdi-face',
+                permission: 'meeting',
+                state: 'triangular.meeting',
+                type: 'link'
+            },{
+                name: 'My Calendar',
+                icon: 'zmdi zmdi-calendar',
+                permission: 'my calendar',
+                state: 'triangular.calendar',
+                type: 'link'
+            }]
+    	});
+    }
+})();

@@ -1,0 +1,31 @@
+(function() {
+    'use strict';
+
+    angular.module('app.main.study')
+        .controller('MessagingController', MessagingController);
+
+    /* @ngInject */
+    function MessagingController (StudyService, AccountService, $localStorage, $state) {
+     	var vm = this;
+     	vm.currentUser = $localStorage.currentUser;
+        vm.baseState = $state.current;
+
+        StudyService.getTest($localStorage.currentUser.accountID).then(function(response) {
+            vm.test = response.data;
+        });
+
+        StudyService.contactList($localStorage.currentUser.accountID).then(function(response) {
+            vm.list = response.data;
+        });
+
+        // opens an email
+        function openMail(email) {
+            $state.go('triangular.chat', {
+                emailID: 2
+            });
+            email.unread = false;
+            vm.selectedMail = email.id;
+        }
+     }
+    
+})();

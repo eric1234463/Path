@@ -1,0 +1,27 @@
+<div style="height:86vh;" layout="column" layout-align="center center">
+    <md-card style="width:50vh;">
+        <md-card-header layout="row" layout-align="space-between">
+            <span class="md-headline" >{{"Make An Appointment"| translate}}</span>
+        </md-card-header>
+        <md-card-content>
+            <form name="appoint" ng-submit="vm.create()">
+                <span layout="row" layout-align="end">
+                    <md-datepicker ng-model="vm.date" md-placeholder="{{'Pick a Date'|translate}}" required></md-datepicker>
+                </span>
+                <md-input-container class="md-block">
+                    <md-icon class="md-accent" md-font-icon="zmdi zmdi-time"></md-icon>
+                    <md-select ng-model="vm.appointment.time" placeholder="{{'Pick a Time'|translate}}" required>
+                        <md-option ng-repeat="time in vm.timings" ng-value="time">{{time}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <md-icon class="md-accent" md-font-icon="zmdi zmdi-comment-outline"></md-icon>
+                    <input type="text" ng-model="vm.appointment.msg" placeholder="Leave a message to your mentor" />
+                </md-input-container>
+                <div layout="row" layout-align="end center">
+                    <md-button class="md-primary md-raised" type="submit" ng-disabled="appoint.$invalid ">{{ "Submit"|translate }}</md-button>
+                </div>
+            </form>
+        </md-card-content>
+    </md-card>
+</div>

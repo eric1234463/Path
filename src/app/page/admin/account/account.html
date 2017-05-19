@@ -1,0 +1,66 @@
+<div class="md-content md-padding">
+    <md-tabs class="md-primary" md-selected="selectedTabIndex" id="case">
+        <md-tab label="Lock Management" aria-label="Lock Management">
+            <div class="md-toolbar-tools">
+                <h2 class="md-title">Lock Management</h2>
+            </div>
+            <div layout="row" layout-xs="column">
+                <md-table-container flex>
+                    <table md-table>
+                        <thead md-head>
+                            <tr md-row>
+                                <th md-column>AccountID</th>
+                                <th md-column>AccountName</th>
+                                <th md-column>Unlcok</th>
+                            </tr>
+                        </thead>
+                        <tbody md-body>
+                            <tr md-row md-auto-select ng-repeat="lock in vm.lockList">
+                                <td md-cell>
+                                    <div ng-bind-html="lock.accountID"></div>
+                                </td>
+                                <td md-cell>
+                                    <div ng-bind-html="lock.accountName"></div>
+                                </td>
+                                <td md-cell>
+                                    <md-button class="md-raised md-primary" type="button" ng-click="vm.unlock(lock)">Unlock</md-button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+            </div>
+        </md-tab>
+        <md-tab label="Account Management" aria-label="Account Management">
+            <div class="md-toolbar-tools">
+                <h2 class="md-title">Account Management</h2>
+            </div>
+            <div layout="row" layout-xs="column">
+                <md-table-container flex>
+                    <table md-table>
+                        <thead md-head>
+                            <tr md-row>
+                                <th md-column>AccountID</th>
+                                <th md-column>AccountName</th>
+                                <th md-column>Upgrade</th>
+                            </tr>
+                        </thead>
+                        <tbody md-body>
+                            <tr md-row md-auto-select ng-repeat="request in vm.requestList">
+                                <td md-cell>
+                                    <div ng-bind-html="request.accountID"></div>
+                                </td>
+                                <td md-cell>
+                                    <div ng-bind-html="request.accountName"></div>
+                                </td>
+                                <td md-cell>
+                                    <md-button class="md-raised md-primary" type="button" ng-click="vm.upgrade(request)">Upgrade</md-button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+            </div>
+        </md-tab>
+    </md-tabs>
+</div>

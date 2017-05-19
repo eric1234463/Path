@@ -1,0 +1,56 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.admin')
+        .controller('EventController', EventController);
+
+    function EventController(AdminService, $mdDialog) {
+        var vm = this;
+        vm.editMode = false;
+        vm.save = save;
+        vm.editOn = editOn;
+        vm.editOff = editOff;
+        vm.event = {
+            subject: '',
+            startDate: '',
+            endDate: '',
+            content: '',
+            numOfPe: '',
+            password: '',
+            confirm: ''
+        };
+
+
+
+        function editOn() {
+            vm.editMode = true;
+        }
+
+        function editOff() {
+            vm.editMode = false;
+            vm.event.subject = '';
+            vm.event.content = '';
+            vm.event.numOfPe = '';
+            vm.event.startDate = '';
+            vm.event.endDate = '';
+        }
+
+        function save() {
+           vm.editMode = false;
+           vm.event.startDate = moment(vm.event.startDate).format('YYYY-MM-DD');
+           vm.event.endDate = moment(vm.event.endDate).format('YYYY-MM-DD');
+           AdminService.createActivity(vm.event.subject, vm.event.numOfPe, vm.event.startDate, vm.event.endDate)
+           $mdDialog.show(
+                $mdDialog.alert()
+                .title('Create Success')
+                .textContent('You Already Create the event!')
+                .ok('Ok')
+            );
+        }
+
+
+
+    }
+
+})();

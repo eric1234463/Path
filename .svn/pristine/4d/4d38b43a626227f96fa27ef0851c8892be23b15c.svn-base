@@ -1,0 +1,23 @@
+// Login
+.login-frame {
+    md-checkbox {
+        margin: 0;
+    }
+    img {
+        display: inline-block;
+        width: auto;
+        max-height: 120px !important;
+        height: initial !important;
+    }
+    md-content {
+        flex-shrink: 0;
+    }
+    md-toolbar {
+        min-height: 180px;
+        display: block;
+        align-items: center;
+        .md-headline {
+            margin: 0;
+        }
+    }
+}

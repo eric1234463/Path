@@ -1,0 +1,49 @@
+<div layout="row" layout-align="center center" layout-fill>
+    <md-card flex="80" class="margin-10">
+        <md-toolbar class="padding-20 text-center">
+            <a href="/"><img ng-src="{{::vm.triSettings.logo}}" alt="{{vm.triSettings.name}}"></a>
+        </md-toolbar>
+        <md-content class="md-padding">
+            <form name="login" ng-submit="vm.loginClick()">
+                <md-input-container class="md-block" md-no-float>
+                    <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
+                    <label for="username" translate>Username</label>
+                    <input id="username" label="username" name="username" type="username" ng-model="vm.user.username" required translate />
+                    <div ng-messages="login.username.$error" md-auto-hide="false" ng-show="login.username.$touched">
+                        <div ng-message when="required"><span>Please enter your username.</span></div>
+                        <div ng-message when="username"><span>Please enter a valid username.</span></div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" md-no-float>
+                    <md-icon md-font-icon="zmdi zmdi-key"></md-icon>
+                    <label for="password" translate>Password</label>
+                    <input id="password" label="password" name="password" type="password" ng-model="vm.user.password" required translate/>
+                    <div ng-messages for="login.password.$error" md-auto-hide="false" ng-show="login.password.$touched">
+                        <div ng-message when="required"><span>Please enter your password.</span></div>
+                    </div>
+                </md-input-container>
+                <div layout="row" layout-align="space-between center">
+                    <md-input-container>
+                        <md-checkbox ng-model="vm.user.rememberMe">
+                            <span translate>Remember Me</span>
+                        </md-checkbox>
+                    </md-input-container>
+                    <md-input-container>
+                        <md-button flex class="md-primary" href="#/forgot" translate="Forget Password?"></md-button>
+                    </md-input-container>
+                </div>
+                <md-button type="submit" class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ng-disabled="login.$invalid" translate="Login"></md-button>
+                <md-button class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" href="#/signup" translate="Sign Up"></md-button>
+                <div class="social-login">
+                    <md-divider></md-divider>
+                    <div class="text-center margin-20" translate>or login with</div>
+                    <div layout="row" layout-align="space-between center" layout-margin>
+                        <md-button href="#" ng-repeat="social in ::vm.socialLogins" class="md-icon-button" ng-style="{ 'background-color': social.color }" aria-label="{{social.icon}}">
+                            <md-icon md-font-icon="{{::social.icon}}"></md-icon>
+                        </md-button>
+                    </div>
+                </div>
+            </form>
+        </md-content>
+    </md-card>
+</div>

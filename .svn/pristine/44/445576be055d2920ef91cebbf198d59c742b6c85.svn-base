@@ -1,0 +1,54 @@
+<div class="md-content md-padding">
+    <h2 translate>Share Your Case</h2>
+    <form name="newcase" ng-submit="vm.create()">
+        <md-input-container class="md-block">
+            <md-icon class="md-accent" md-font-icon="zmdi zmdi-graduation-cap"></md-icon>
+            <md-select ng-model="vm.case.school" placeholder= "{{'The University You Attend' | translate}}" ng-change="vm.getProgramList()" name="school" required>
+                <md-option ng-repeat="school in vm.schoolList" ng-value="{{school.schoolID}}">{{school.schoolName}}</md-option>
+            </md-select>
+            <div ng-messages for="signup.school.$error" md-auto-hide="false" ng-show="signup.school.$touched">
+                <div ng-message when="required">Please Choose Your School</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block ">
+            <md-icon class="md-accent" md-font-icon="zmdi zmdi-library"></md-icon>
+            <md-select placeholder= "{{'Programme You Study' | translate}}" ng-model="vm.case.program" name="program" ng-disabled="vm.case.school == 0" required>
+                <md-option ng-repeat="program in vm.programList" ng-value="{{program.programID}}"> {{program.programName}}</md-option>
+            </md-select>
+            <div ng-messages for="signup.program.$error" md-auto-hide="false" ng-show="signup.program.$touched">
+                <div ng-message when="required">Please Choose Your Program</div>
+            </div>
+        </md-input-container>
+        <md-datepicker ng-model="vm.date" md-placeholder="{{'Date of Offer' | translate}}" required></md-datepicker>
+        <md-input-container>
+            <md-switch aria-label="bool" ng-model="vm.case.dse">{{ "DSE Full Cert" | translate }}</md-switch>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Year 1 Semester 1</label>
+            <md-icon class="md-accent" md-font-icon="zmdi zmdi-assignment"></md-icon>
+            <input type="number" ng-model="vm.case.yr1sem1" step=0.1 required>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Year 1 Semester 2</label>
+            <md-icon class="md-accent" md-font-icon="zmdi zmdi-assignment"></md-icon>
+            <input type="number" ng-model="vm.case.yr1sem2" step=0.1 required>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Year 2 Semester 1</label>
+            <md-icon class="md-accent" md-font-icon="zmdi zmdi-assignment"></md-icon>
+            <input type="number" ng-model="vm.case.yr2sem1" step=0.1 required>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Year 2 Semester 2</label>
+            <md-icon class="md-accent" md-font-icon="zmdi zmdi-assignment"></md-icon>
+            <input type="number" ng-model="vm.case.yr2sem2" step=0.1 required>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>IELTS (optional)</label>
+            <md-icon class="md-accent" md-font-icon="zmdi zmdi-assignment"></md-icon>
+            <input type="number" ng-model="vm.case.ielts">
+        </md-input-container>
+        <md-button class="md-raised md-primary margin-left-0"  ng-disabled="newcase.$invalid" type="submit" >{{ "Submit" | translate }}</md-button>
+    </form>
+</div>
+</div>

@@ -1,0 +1,52 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.study')
+        .controller('ActController', ActController);
+
+    /* @ngInject */
+    function ActController (StudyService, $localStorage, $mdDialog) {
+        var vm = this;
+        vm.join = join;
+        vm.form = form;
+
+
+        StudyService.getEvents($localStorage.currentUser.accountID, $localStorage.currentUser.schoolID).then(function(response) {
+            vm.acts = response.data;
+            console.log(vm.acts);
+        });
+
+        vm.bool = false;
+        if ($localStorage.currentUser.roles[0] == "ADMIN") {
+            vm.bool = true;
+        }
+
+        function join(eventID) {
+            $mdDialog.show(
+                $mdDialog.confirm()
+                .title('Are You Sure?')
+                .textContent('')
+                .ok('Ok')
+                .cancel('cancel')
+            ).then(function() {
+                StudyService.joinActivity(eventID,$localStorage.currentUser.accountID);
+            });
+        }
+
+        function form(eventID) {
+            $mdDialog.show(
+                $mdDialog.confirm()
+                .title('Are You Sure?')
+                .textContent('')
+                .ok('Ok')
+                .cancel('cancel')
+            ).then(function() {
+                StudyService.formGrp(eventID);
+                window.location.reload();
+            });
+        }
+
+    }
+    
+})();

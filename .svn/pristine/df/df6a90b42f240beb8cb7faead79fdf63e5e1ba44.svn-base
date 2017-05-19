@@ -1,0 +1,19 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.study')
+        .controller('ActController', ActController);
+
+    /* @ngInject */
+    function ActController (StudyService) {
+        var vm = this;
+
+        StudyService.getEvents().then(function(response) {
+            vm.acts = response.data;
+            console.log(vm.acts);
+        });
+
+    }
+    
+})();

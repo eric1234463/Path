@@ -1,0 +1,14 @@
+<div class="md-content md-padding">
+    <h2>Upload Mentor Notes</h2>
+    <md-input-container class="md-block">
+        <label>Note Name</label>
+        <input type="text">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Note Descirption</label>
+        <input type="text">
+    </md-input-container>
+    <div layout="row" layout-align="end center">
+        <md-button class="md-primary">Create</md-button>
+    </div>
+</div>

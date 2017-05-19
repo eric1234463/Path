@@ -1,0 +1,59 @@
+<div class="md-content md-padding">
+    <div layout="row" layout-wrap>
+        <div flex="100" flex-gt-md="100">
+            <md-content class="md-padding">
+                <md-card-content>
+                    <form name="eventForm">
+                        <div class='row'>
+                            <md-button class="md-raised md-primary" aria-label="flat button" ng-click="vm.editOn()" ng-disabled="vm.editMode">Edit</md-button>
+                            <md-button class="md-raised md-primary" aria-label="flat button" ng-click="vm.editOff()" ng-show="vm.editMode">Cancel</md-button>
+                            <md-button class="md-raised md-primary" aria-label="flat button" ng-click="vm.save()" ng-show="vm.event.subject&&vm.event.numOfPe&&vm.event.startDate&&vm.event.endDate&&vm.editMode">Save</md-button>
+                        </div>
+                        <div layout="row" layout-xs="column">
+                            <div flex class="margin-10 ">
+                                <div layout="row" layout-xs="column">
+                                    <div flex class="margin-10">
+                                        <md-input-container class="md-block">
+                                            <label for="subject" translate>Subject</label>
+                                            <input ng-model="vm.event.subject" name="subject" ng-disabled="vm.editMode == false" required>
+                                            <div ng-messages="eventForm.subject.$error">
+                                                <div ng-message when="required"><span translate>Please enter a subject for the event.</span></div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-block">
+                                            <label for="subject" translate>Number of participant</label>
+                                            <input ng-model="vm.event.numOfPe" name="number" ng-disabled="vm.editMode == false" required>
+                                            <div ng-messages="eventForm.number.$error">
+                                                <div ng-message when="required"><span translate>Please enter number of participant.</span></div>
+                                            </div>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <div layout="row" layout-xs="column">
+                                    <div flex class="margin-10">
+                                        <md-input-container class="md-block">
+                                            <label translate>Start Date</label>
+                                            <md-datepicker ng-model="vm.event.startDate" ng-disabled="vm.editMode == false" required></md-datepicker>
+                                        </md-input-container>
+                                    </div>
+                                    <div flex class="margin-10">
+                                        <md-input-container class="md-block">
+                                            <label translate>End Date</label>
+                                            <md-datepicker ng-model="vm.event.endDate" ng-disabled="vm.editMode == false" required></md-datepicker>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <md-input-container flex class="md-block">
+                                    <text-angular name="eventBody" ng-show="vm.editMode" ng-model="vm.event.content" ta-target-toolbars="editor-toolbar"></text-angular>
+                                </md-input-container>
+                                <text-angular-toolbar name="editor-toolbar" class="email-dialog-editor-toolbar" ng-show="vm.editMode" ta-toolbar-active-button-class="active"></text-angular-toolbar>
+                            </div>
+                            <div flex class="margin-10 ">
+                            </div>
+                        </div>
+                    </form>
+                </md-card-content>
+            </md-content>
+        </div>
+    </div>
+</div>

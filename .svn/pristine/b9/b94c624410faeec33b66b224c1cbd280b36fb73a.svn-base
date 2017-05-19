@@ -1,0 +1,61 @@
+<?php
+require ("dbconn.php");
+session_start();
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+$dbconn = dbconn();
+if (!$dbconn) {
+    die("dbconnection failed: " . mysqli_dbconnect_error());
+} 
+else {
+	$action = $_GET['action'];
+	$data = Array();
+	switch ($action) {
+
+		case 'testMessage':
+		$accountID = $_GET['accountID'];
+		$sql = "SELECT * FROM ChatMessage WHERE senderAccountID = $accountID";
+		$result = mysqli_query($dbconn, $sql);
+		while ($row = mysqli_fetch_assoc($result)) {
+				$data[] = array(
+						'ChatId' => $row['chatID'],
+						'MessageId' => $row['messageID'],
+						'SenderId' => $row['senderAccountID'],
+						'ReceiverId' => $row['receieverAccountID'],
+						'Message' => $row['message'],
+						'MessageTime' => $row['messageTime']
+					);
+		};
+		echo json_encode($data);
+		break;
+
+		case 'getContactList':
+		$accountID = $_GET['accountID'];
+		$sql = "SELECT * FROM (SELECT Chatroom.chatID, Chatroom.firstUser, Chatroom.secondUser,
+						CASE
+  							WHEN (Chatroom.firstUser = $accountID) THEN Chatroom.secondUser
+ 								WHEN (Chatroom.secondUser = $accountID) THEN Chatroom.firstUser
+							END AS other
+						FROM Chatroom
+						WHERE Chatroom.firstuser=$accountID OR Chatroom.secondUser=$accountID) AS chatrecord LEFT JOIN Account ON (Account.accountID = chatrecord.other OR chatrecord.other = Account.accountID)";
+		$result = mysqli_query($dbconn, $sql);
+		while ($row = mysqli_fetch_assoc($result)) {
+				$data[] = array(
+						'ChatId' => $row['chatID'],
+						'FirstUser' => $row['firstUser'],
+						'SecondUser' => $row['secondUser'],
+						'AccountName' => $row['accountName'],
+						'AccountIcon' => $row['accountIcon']
+					);
+		};
+		echo json_encode($data);
+		break;
+
+
+
+	}
+}
+mysqli_close($dbconn);
+
+
+?>

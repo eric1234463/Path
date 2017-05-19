@@ -1,0 +1,44 @@
+<div class="md-content md-padding">
+    <div class="md-toolbar-tools">
+        <h2 class="md-title">User Data</h2>
+    </div>
+    <div layout="row" layout-xs="column">
+        <counter-widget flex flex-sm="50" title="Student" count="vm.studentCount" icon="zmdi zmdi-face" background="red-A700" color="white"></counter-widget>
+        <counter-widget flex flex-sm="50" title="Mentor" count="vm.mentorCount" icon="zmdi zmdi-graduation-cap" background="blue-A700" color="white"></counter-widget>
+        <counter-widget flex flex-sm="50" title="Case" count="vm.caseCount" icon="zmdi zmdi-assignment-check" background="purple-A700" color="white"></counter-widget>
+        <counter-widget flex flex-sm="50" title="View" count="vm.viewCount" icon="zmdi zmdi-eye" background="teal-A700" color="white"></counter-widget>
+    </div>
+    <div class="md-toolbar-tools">
+        <h2 class="md-title">Log Table</h2>
+    </div>
+    <div layout="row" layout-xs="column">
+        <md-table-container flex>
+            <table md-table>
+                <thead md-head>
+                    <tr md-row>
+                        <th md-column>LogID</th>
+                        <th md-column>Log Type</th>
+                        <th md-column>Log Descption</th>
+                        <th md-column>Create Date</th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row md-auto-select ng-repeat="log in vm.logList">
+                        <td md-cell>
+                            <div ng-bind-html="log.logID"></div>
+                        </td>
+                        <td md-cell>
+                            <div ng-bind-html="log.logType"></div>
+                        </td>
+                        <td md-cell>
+                            <div ng-bind-html="log.logDesc"></div>
+                        </td>
+                        <td md-cell>
+                            <div ng-bind-html="log.createDt"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+    </div>
+</div>

@@ -1,0 +1,163 @@
+<div layout="column" flex scroll id="landing">
+    <md-toolbar ng-class="{fadeIn: bool, fadeOut: !bool}" id="topbar">
+        <div class="md-toolbar-tools">
+            <a href="#/landing"> <img id="navbar-logo" ng-src="{{::vm.triSettings.logo}}" alt="{{vm.triSettings.name}}">
+            </a>
+            <span flex></span>
+            <md-button class="md-primary md-hue-3" aria-label="flat button" id="text2" href="#/login">Login
+                <md-icon md-font-icon="zmdi zmdi-sign-in" style='color: #FFF'></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div style="background-image: url(assets/images/banner.jpg); background-position: center; background-size: cover;">
+        <div layout="row" layout-xs="column" layout-align="center center" id="bg">
+            <div flex>
+                <img hide-xs id="tablet" src="assets/images/landing/landing0.png" />
+            </div>
+            <div flex class="padding-30">
+                <h1 id="title">PATH</h1>
+                <br/>
+                <h3 id="comment">Your Path to academic success</h3>
+                <md-button class="md-raised" palette-background="triCyan:900" aria-label="flat button" href="#/login">Join Us</md-button>
+            </div>
+        </div>
+    </div>
+    <div hide-xs palette-background="blue:500">
+        <div layout="row" layout-xs="column" layout-align="center center">
+            <div flex class="margin-10">
+                <md-card id="card" layout-align="center center" palette-background="blue:300">
+                    <md-card-title>
+                        <md-card-title-text layout-align="center center">
+                            <md-button class="md-fab" palette-background="blue:400" id="big-fab" aria-label="fab button">
+                                <md-icon id="big" md-font-icon="fa fa-mobile-phone"></md-icon>
+                            </md-button>
+                            <h2 class="md-headline" id="headline">Responsive</h2>
+                            <p class="md-subtitle" id="subtitle">We Provide Responsive Layout for user</p>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+            </div>
+            <div flex class="margin-10">
+                <md-card id="card" layout-align="center center" palette-background="blue:300">
+                    <md-card-title>
+                        <md-card-title-text layout-align="center center">
+                            <md-button class="md-fab" palette-background="blue:400" id="big-fab" aria-label="fab button">
+                                <md-icon id="big2" md-font-icon="fa fa-briefcase"></md-icon>
+                            </md-button>
+                            <h2 class="md-headline" id="headline">Plan Your Future</h2>
+                            <p class="md-subtitle" id="subtitle">Help You To Get Into University</p>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+            </div>
+            <div flex class="margin-10">
+                <md-card id="card" md-card layout-align="center center" palette-background="blue:300">
+                    <md-card-title>
+                        <md-card-title-text layout-align="center center">
+                            <md-button class="md-fab" palette-background="blue:400" id=" big-fab" aria-label="fab button">
+                                <md-icon id="big2" md-font-icon="fa fa-eye"></md-icon>
+                            </md-button>
+                            <h2 class="md-headline" id="headline">Business Intelligence</h2>
+                            <p class="md-subtitle" id="subtitle">Help You Analysis the Data We have</p>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+            </div>
+        </div>
+    </div>
+    <div hide-xs style="background-image: url(assets/images/landing/stat.jpg); background-position: center; background-size: cover;">
+        <div layout="row" layout-xs="column" layout-align="center center" class="margin-top-50 margin-bottom-50">
+            <div flex>
+                <img id='imgview' src="assets/images/landing/stat.png">
+            </div>
+            <div flex style="text-align: left;">
+                <h1 id="headline">The most advanced and extensive educational analysis system in Hong Kong</h1>
+                <h3 id="subtitle">Incorporates data collected from non-jupas student all over Hong Kong.</h3>
+            </div>
+        </div>
+    </div>
+    <div palette-background="light-blue:50">
+        <div layout="column" layout-align="center center" class="margin-50">
+            <span class="md-display-3" id="dark-headline">Amazing Features</span>
+            <div layout="row" layout-xs="column" layout-align="start start" flex>
+                <div flex>
+                    <p class="md-title" id="dark-subtitle">
+                        <md-icon md-font-icon="zmdi zmdi-accounts" /> Mentorship Programme</p>
+                    <p hide-xs>Recieve guidance from a mentor of your choice from your college. Successful students can apply to be mentors and help others.
+                    </p>
+                </div>
+                <div flex>
+                    <h3 id="dark-subtitle"><md-icon md-font-icon="zmdi zmdi-time-countdown"/> Live Statistic</h3>
+                    <p hide-xs>We provide live statistics of university offers using data collected from other users. Be the first to know when an offer is sent out!
+                    </p>
+                </div>
+                <div flex>
+                    <h3 id="dark-subtitle"><md-icon md-font-icon="zmdi zmdi-comment-outline"/> Messenger</h3>
+                    <p hide-xs>Communicate seamlessly with other users using our very own built-in messaging platform.
+                    </p>
+                </div>
+            </div>
+            <div layout="row" layout-xs="column" layout-align="start start" flex>
+                <div flex>
+                    <h3 id="dark-subtitle"><md-icon md-font-icon="zmdi zmdi-eye"/> View Previous Case</h3>
+                    <p hide-xs>Past successful case information collected from various students accross Hong Kong available for your reference and evaluation.
+                    </p>
+                </div>
+                <div flex>
+                    <h3 id="dark-subtitle"><md-icon md-font-icon="zmdi zmdi-time"/> Timeline</h3>
+                    <p hide-xs>Intuitive view of upcoming deadlines, open days and other admission related events organized by Universities.
+                    </p>
+                </div>
+                <div flex>
+                    <h3 id="dark-subtitle"><md-icon md-font-icon="zmdi zmdi-wrench"/> Admin Management</h3>
+                    <p hide-xs>Advanced controls built-in to the system for administrators in a user-friendly, easy-to-use interface. Now anyone can be an admin!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div hide-xs style="background-image: url(assets/images/landing/work.jpg); background-position: center; background-size: cover;">
+        <div layout="row" layout-xs="column" layout-align="center center" class="margin-top-50 margin-bottom-50">
+            <div flex style="text-align: right;">
+                <h1 id="headline">BEAUTIFUL RESPONSIVE WEBSITES</h1>
+                <h3 id="subtitle">PATH is a fully responsive, mobile-ready websites that look amazing on any devices and browsers. </h3>
+            </div>
+            <div flex>
+                <img id='imgview' src="assets/images/landing/responsive.png">
+            </div>
+        </div>
+    </div>
+    <div class="padding-30" palette-background="blue:700">
+        <div layout="row" layout-xs="column" layout-align="center center" class="margin-50">
+            <div flex>
+                <p hide-xs class="md-title" id="text2">Please send us your ideas, bug reports, suggestions! Any feedback would be greatly appreciated. Also don't forget to add PATH to your bookmarks!</p>
+            </div>
+            <div flex>
+                <p id="text2">
+                    <md-icon id="big3" md-font-icon="fa fa-envelope-o" style="color: #FFF"></md-icon>
+                    <a class="md-title">support@path.com</a>
+                </p>
+            </div>
+            <div flex>
+                <p class="md-title" id="text2">ALSO FOLLOW US ON:</p>
+                <p id="text2">
+                    <md-button class="md-fab" palette-background="blue:900" aria-label="fab button">
+                        <md-icon id="big3" md-font-icon="fa fa-facebook-square"></md-icon>
+                    </md-button>
+                    <md-button class="md-fab" palette-background="blue:900" aria-label="fab button">
+                        <md-icon id="big3" md-font-icon="fa fa-twitter-square"></md-icon>
+                    </md-button>
+                    <md-button class="md-fab" palette-background="blue:900" aria-label="fab button">
+                        <md-icon id="big3" md-font-icon="fa fa-google-plus-square"></md-icon>
+                    </md-button>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div palette-background="blue:900">
+        <div layout="row" layout-align="center end">
+            <p id="text2">Copyright (c) 2016 PATH.</p>
+        </div>
+    </div>
+</div>
+</div>

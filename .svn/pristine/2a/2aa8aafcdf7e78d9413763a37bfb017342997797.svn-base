@@ -1,0 +1,150 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.admin')
+        .config(moduleConfig);
+
+    function moduleConfig($stateProvider, triMenuProvider) {
+
+        $stateProvider
+            .state('triangular.adminanalysis', {
+                url: '/adminanalysis/',
+                data: {
+                    layout: {
+                        showToolbar: true
+                    },
+                    permissions: {
+                        only: ['admin managment'],
+                        redirectTo: '404'
+                    }
+                },
+                templateUrl: 'app/page/admin/adminanalysis/adminanalysis.html',
+                controller: 'AdminAnalysisController',
+                controllerAs: 'vm'
+            })
+
+        .state('triangular.school', {
+            url: '/school/',
+            data: {
+                layout: {
+                    showToolbar: true
+                },
+                permissions: {
+                    only: ['admin managment']
+                }
+            },
+            templateUrl: 'app/page/admin/school/school.html',
+            controller: 'SchoolController',
+            controllerAs: 'vm'
+        })
+
+        .state('triangular.program', {
+            url: '/program/',
+            data: {
+                layout: {
+                    showToolbar: true
+                },
+                permissions: {
+                    only: ['admin managment']
+                }
+            },
+            templateUrl: 'app/page/admin/program/program.html',
+            controller: 'ProgramController',
+            controllerAs: 'vm'
+        })
+
+        .state('triangular.timelineMangement', {
+            url: '/timelineMangement/',
+            data: {
+                layout: {
+                    showToolbar: true
+                },
+                permissions: {
+                    only: ['admin managment']
+                }
+            },
+            templateUrl: 'app/page/admin/timeline/timeline.html',
+            controller: 'TimlineManagementController',
+            controllerAs: 'vm'
+        })
+
+        .state('triangular.createEvent', {
+            url: '/createEvent/',
+            data: {
+                layout: {
+                    showToolbar: true
+                },
+                permissions: {
+                    only: ['admin managment']
+                }
+            },
+            templateUrl: 'app/page/admin/event/createEvent.html',
+            controller: 'EventController',
+            controllerAs: 'vm'
+        })
+
+
+        .state('triangular.setUsersPermission', {
+            url: '/setUsersPermission/',
+            data: {
+                layout: {
+                    showToolbar: true
+                },
+                permissions: {
+                    only: ['admin managment']
+                }
+            },
+            templateUrl: 'app/page/admin/setuserspermission/setUsersPermission.html',
+            controller: 'SetUsersPermissionController',
+            controllerAs: 'vm'
+        });
+
+
+
+        triMenuProvider.addMenu({
+            name: 'Systen Management',
+            icon: 'zmdi zmdi-wrench',
+            priority: 5,
+            permission: 'admin managment',
+            type: 'dropdown',
+            children: [{
+                name: 'Systen Analysis',
+                icon: 'zmdi zmdi-trending-up',
+                state: 'triangular.adminanalysis',
+                type: 'link'
+            }, {
+                name: 'Role Security Control',
+                icon: 'zmdi zmdi-account-box-o',
+                state: 'triangular.setUsersPermission',
+                type: 'link'
+            }, {
+                name: 'University Management',
+                icon: 'fa fa-building-o',
+                state: 'triangular.school',
+                type: 'link'
+            }, {
+                name: 'Sub Degree Program Management',
+                icon: 'fa fa-building-o',
+                state: 'triangular.program',
+                type: 'link'
+            }, {
+                name: 'Timeline Management',
+                icon: 'zmdi zmdi-time',
+                state: 'triangular.timelineMangement',
+                type: 'link'
+            }, {
+                name: 'Create Event',
+                icon: 'zmdi zmdi-collection-item',
+                state: 'triangular.createEvent',
+                type: 'link'
+            }, {
+                name: 'Event Management',
+                icon: 'zmdi zmdi-collection-item',
+                state: 'triangular.event',
+                type: 'link'
+            }]
+        });
+
+    }
+})();

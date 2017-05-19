@@ -1,0 +1,42 @@
+
+<div layout="column">
+    <div layout="row" layout-xs="column" layout-wrap flex="auto" layout-align="center">
+        <md-whiteframe layout="row" class="md-whiteframe-z3 margin-20 text-center" id="meeting" layout-align="start start" palette-background="blue-grey:700">
+            <i class="fa fa-info-circle" id="info"></i>
+                <p id="top">Please be aware of that, you are allowed to follow one of the student mentor once only.
+                You cannot make any change after you have choosen someone as your mentor.</p>
+        </md-whiteframe>
+        <md-card id="mentor-card" ng-repeat="mentor in vm.mentorList">
+            <md-card-header>
+                <md-card-avatar>
+                    <img class="md-user-avatar" src="{{mentor.accountIcon}}"/>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title">{{mentor.accountName}}</span>
+                    <span class="md-subhead">{{mentor.degreeSchoolName}}</span>
+                </md-card-header-text>
+            </md-card-header>
+                <md-card-content>
+                    <md-highlight-text>CGPA in Sub-degree: {{mentor.cgpa}}</md-highlight-text>           
+                    <p id="top">Description: {{mentor.description}}</p>   
+                </md-card-content>
+            <md-card-actions layout="row" layout-align="start end">
+                <md-button class="md-icon-button" aria-label="Facebook">
+                    <md-icon md-font-icon="fa fa-facebook"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="GooglePlus">
+                    <md-icon md-font-icon="fa fa-google-plus"></md-icon>
+                </md-button>              
+            </md-card-actions>
+
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-primary md-raised" type="button" aria-label="Request" ng-click= vm.dialog(mentor.accountID)>
+                    Follow him/her
+                </md-button> 
+            </md-card-actions> 
+        </md-card>
+    </div>
+    <div layout="row" layout-align="center">
+        <md-highlight-text>You have reached the end.</md-highlight-text>
+    </div>
+</div>

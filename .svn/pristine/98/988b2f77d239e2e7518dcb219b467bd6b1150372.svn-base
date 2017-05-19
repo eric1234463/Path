@@ -1,0 +1,38 @@
+(function() {
+    'use strict';
+
+    angular.module('app.main.study')
+        .controller('ChatController', ChatController);
+
+    /* @ngInject */
+    function ChatController (StudyService, AccountService, $localStorage, $state, returnChat, $stateParams) {
+        var vm = this;
+        vm.currentUser = $localStorage.currentUser;
+        vm.baseState = $state.current;
+        vm.returnChat = returnChat;
+        
+         vm.conversation = [{
+                name: 'Morris Onions',
+                image: 'assets/images/avatars/avatar-6.png',
+                messages: ['Hi there how are you?', 'Hello?']
+            },{
+                name: 'Danny Ings',
+                image: 'assets/images/avatars/avatar-3.png',
+                messages: ['Howsitgowin?']
+            },{
+                name: 'Morris Onions',
+                image: 'assets/images/avatars/avatar-6.png',
+                messages: ['We need those images ASAP!', 'Client asked about them.']
+            },{
+                name: 'Danny Ings',
+                image: 'assets/images/avatars/avatar-3.png',
+                messages: ['OK, will send them over']
+            }];
+
+        // returns back to email list
+        vm.userClass = function($even) {
+                return $even ? 'user-left' : 'user-right';
+            };
+     }
+    
+})();

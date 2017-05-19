@@ -1,0 +1,38 @@
+<div class="md-content md-padding">
+    <form name="schoolForm" ng-submit="vm.submit()">
+        <div class='row'>
+            <md-button class="md-raised md-primary" aria-label="flat button" ng-disabled="vm.editMode" ng-click="vm.editON()">Edit</md-button>
+            <md-button class="md-raised md-primary" type="submit" aria-label="flat button" ng-disabled="vm.save">Save</md-button>
+            <md-button class="md-raised md-primary" type="button" ng-disabled="vm.save" ng-click="vm.cancel()">Cancel</md-button>
+        </div>
+        <div class='row'>
+            <md-table-container>
+                <table md-table>
+                    <thead md-head>
+                        <tr md-row>
+                            <th md-column>SchoolID</th>
+                            <th md-column>SchoolName</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row md-auto-select ng-repeat="school in vm.schoolList">
+                            <td md-cell>
+                                <div ng-bind-html="school.schoolID"></div>
+                            </td>
+                            <td md-cell>
+                                <div ng-bind-html="school.schoolName" ng-if="vm.editMode == false"></div>
+                                <md-input-container class="md-block" md-no-float ng-if="vm.editMode == true">
+                                    <label for="schoolName" translate>SchoolName</label>
+                                    <input type="text" name="schoolName" ng-model="school.schoolName" required />
+                                    <div ng-messages="schoolForm.schoolName.$error" md-auto-hide="false" ng-show="schoolForm.schoolName.$touched">
+                                        <div ng-message when="required"><span>Please enter your schoolName.</span></div>
+                                    </div>
+                                </md-input-container>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+        </div>
+    </form>
+</div>

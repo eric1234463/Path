@@ -1,0 +1,13 @@
+(function() {
+    'use strict';
+
+    angular.module('app.main.study')
+        .controller('MessagingController', MessagingController);
+
+    /* @ngInject */
+    function MessagingController () {
+     	var vm = this;
+     	vm.contacts = ['Jack', 'Jane', 'Joseph', 'Bryan', 'Zack', 'JunkieXL'];
+     }
+    
+})();

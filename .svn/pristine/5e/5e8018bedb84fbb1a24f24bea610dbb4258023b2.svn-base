@@ -1,0 +1,38 @@
+#icon {
+    width : 150px;
+    height : 150px;
+}
+
+#label {
+    text-align : center;
+    font-size : 30px;
+    font-family: "Courier", Georgia, Serif;
+}
+
+
+
+#label2 {
+     font-size : 20px;
+    
+}
+
+#size {
+    font-size : 30px;
+}
+
+.upper {
+    text-transform : uppercase;
+}
+
+.status {
+    padding: 8px 14px;
+    margin: 0 5px;
+    border-radius:10px;
+    min-width: 60px;
+    display: inline-block;
+    text-align: center;
+    background-color: #CC66FF;
+    color: #fff;
+  }
+
+ 

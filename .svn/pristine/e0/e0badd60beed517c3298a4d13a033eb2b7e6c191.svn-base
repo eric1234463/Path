@@ -1,0 +1,63 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.admin')
+        .controller('TimlineManagementController', TimlineManagementController);
+
+    function TimlineManagementController(AdminService, $mdDialog) {
+        var vm = this;
+        vm.editMode = false;
+        vm.editON = editON;
+        vm.save = true;
+        vm.submit = submit;
+        vm.cancel = cancel;
+        vm.remove = remove;
+        AdminService.getEventList().then(function(response) {
+            vm.eventList = response.data;
+            for (i = 0; i < vm.eventList.length; i++) {
+                vm.eventList[i].eventDate = new Date(vm.eventList[i].eventDate);
+
+            }
+        });
+
+        function editON() {
+            vm.editMode = true;
+            vm.save = false;
+        }
+
+        function cancel() {
+            vm.editMode = false;
+            vm.save = true;
+        }
+
+        function remove(event) {
+            $mdDialog.show(
+                $mdDialog.confirm()
+                .title('Delete Event')
+                .textContent('Are you sure to Delete this Event?')
+                .ok('Yes')
+                .cancel('Cancel')
+            ).then(function() {
+                vm.eventList.splice(vm.eventList.indexOf(event), 1);
+                AdminService.removeEvent(event);
+            })
+        }
+
+        function submit() {
+            vm.editMode = false;
+            vm.save = true;
+            for (var i = 0; i < vm.eventList.length; i++) {
+                AdminService.setEvent(vm.eventList[i]);
+            }
+
+            $mdDialog.show(
+                $mdDialog.alert()
+                .title('Update Success')
+                .textContent('You Already Update the Event Information!')
+                .ok('Ok')
+            );
+        }
+    }
+
+})();

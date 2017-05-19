@@ -1,0 +1,68 @@
+<div class="md-content md-padding">
+    <md-tabs class="md-primary" md-selected="selectedTabIndex" id="table">
+        <md-tab label="student">
+            <md-table-container flex>
+                <table md-table>
+                    <thead md-head>
+                        <tr md-row>
+                            <th md-column></th>
+                            <th md-column id="name">Function Name</th>
+                            <th md-column id="name">Control</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body ng-repeat="function in vm.functionList">
+                        <tr md-row>
+                            <td md-cell colspan="2">
+                                <md-icon md-font-icon="{{function.icon}}" /> <span id="parent">{{function.name}}</span>
+                            </td>
+                            <td>
+                                <md-switch class="md-warn md-secondary" aria-label="boolean" ng-model="function.own" ng-init="function.own"></md-switch>
+                            </td>
+                        </tr>
+                        <tr md-row md-auto-select ng-repeat="child in function.child">
+                            <td align="center"></td>
+                            <td md-cell>
+                                <md-icon md-font-icon="{{child.icon}}" /><span class="md-subhead">{{child.name}}</span></td>
+                            <td md-cell>
+                                <md-switch ng-disabled="!function.own" class="md-secondary" aria-label="boolean" ng-model="child.own"></md-switch>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+        </md-tab>
+        <md-tab label="mentor">
+            <md-table-container flex>
+                <table md-table>
+                    <thead md-head>
+                        <tr md-row>
+                            <th md-column></th>
+                            <th md-column id="name">Function Name</th>
+                            <th md-column id="name">Control</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body ng-repeat="function in vm.functionList2">
+                        <tr md-row>
+                            <td md-cell colspan="2">
+                                <md-icon md-font-icon="{{function.icon}}" /> <span id="parent">{{function.name}}</span>
+                            </td>
+                            <td>
+                                <md-switch class="md-warn md-secondary" aria-label="boolean" ng-model="function.own" ng-init="function.own"></md-switch>
+                            </td>
+                        </tr>
+                        <tr md-row md-auto-select ng-repeat="child in function.child">
+                            <td align="center"></td>
+                            <td md-cell>
+                                <md-icon md-font-icon="{{child.icon}}" /><span class="md-subhead">{{child.name}}</span></td>
+                            <td md-cell>
+                                <md-switch ng-disabled="!function.own" class="md-secondary" aria-label="boolean" ng-model="child.own"></md-switch>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+        </md-tab>
+    </md-tabs>
+    <md-table-pagination md-limit="vm.query.limit" md-limit-options="[1, 2, 3]" md-page="vm.query.page" md-total="4" md-page-select md-on-paginate="vm.getAllFunction(1)"></md-table-pagination>
+    <md-button class="md-raised md-primary" aria-label="flat button" ng-click="vm.update() ; vm.showToast($event, 'bottom right')"> Save Changes</md-button>
+</div>

@@ -1,0 +1,34 @@
+<div class="full-image-background mb-bg-03 padding-30  overlay-gradient-30" layout="row" layout-align="center start">
+    <div class="margin-right-20">
+        <img ng-src="{{vm.mentor.avatar}}" alt="girl-avatar" class="make-round" width="100" />
+    </div>
+    <div class="text-light">
+        <h3 class="font-weight-600 margin-bottom-0 text-light">{{vm.mentor.displayName}}</h3>
+    </div>
+</div>
+<div layout="row" class="profile" layout-wrap>
+    <div flex="100" flex-gt-md="100">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="{{'Profile' | translate}}">
+                <md-content class="md-padding">
+                    <md-card-content>
+                        <form name="profile">
+                            <div>
+                                <label for="name">{{ "Username" | translate }}</label>
+                                <p class="md-caption">{{vm.mentor.displayName}}</p>
+                                <label for="School">{{ "University" | translate }}</label>
+                                <p class="md-caption">{{vm.mentor.schoolName}}</p>
+                                <label for="Program">{{ "Programme" | translate }}</label>
+                                <p class="md-caption">{{vm.mentor.programName}} -- Year {{vm.mentor.year}} </p>
+                                <label for="CGPA">{{ "CGPA" | translate }}</label>
+                                <p class="md-caption">{{vm.mentor.cgpa}} </p>
+                                <label for="Role">{{ "Role" | translate }}</label>
+                                <p class="md-caption">{{vm.mentor.roles[0]}}</p>
+                            </div>
+                        </form>
+                    </md-card-content>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </div>
+</div>

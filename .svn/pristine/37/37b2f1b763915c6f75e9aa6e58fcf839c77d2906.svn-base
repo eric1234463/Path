@@ -1,0 +1,50 @@
+angular
+    .module('app.main.study', [])
+    .factory('StudyService', function($http) {
+        return {
+            getTimeLine : function() {
+                var query = $http.get('http://unicomhk.net/path2/php/study.php?action=getTimeLine');
+                return query;
+            },
+
+            getEvents : function(acID,subdegreeID) {
+            	var query = $http.get('http://unicomhk.net/path2/php/study.php?action=getEvents&acID=' + acID + '&subdegreeID=' + subdegreeID );
+            	return query;
+            },
+
+            joinActivity : function(evtID, acID) {
+                var query = $http.get('http://unicomhk.net/path2/php/study.php?action=joinActivity&evtID=' + evtID + '&acID=' + acID );
+                return query;
+            },
+
+            getTest : function(accountID) {
+            	var query = $http.get('http://unicomhk.net/path2/php/chat.php?action=testMessage&accountID=' + accountID);
+            	return query;
+            },
+
+            getMessage : function(chatID) {
+                var query = $http.get('http://unicomhk.net/path2/php/chat.php?action=getMessage&chatID=' + chatID);
+                return query;
+            },
+
+            getContactList : function(accountID) {
+                var query = $http.get('http://unicomhk.net/path2/php/chat.php?action=getContactList&accountID=' + accountID);
+                return query;
+            },
+
+            contactList : function(accountID) {
+                var query = $http.get('http://unicomhk.net/path2/php/chat.php?action=contactList&accountID=' + accountID);
+                return query;
+            },
+
+            sendMessage : function(chatID, firstUser, secondUser, message, messageTime, senderAccountID) {
+                var query = $http.get('http://unicomhk.net/path2/php/chat.php?action=sendMessage&chatID=' + chatID 
+                    + "&firstUser=" + firstUser
+                    + "&secondUser=" + secondUser
+                    + "&message=" + message
+                    + "&messageTime=" + messageTime
+                    + "&senderAccountID=" + senderAccountID);
+                return query;
+            }
+        };
+    });

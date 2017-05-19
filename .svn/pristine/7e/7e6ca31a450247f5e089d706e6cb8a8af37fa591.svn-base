@@ -1,0 +1,82 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.study')
+        .config(moduleConfig);
+
+    /* @ngInject */
+    function moduleConfig($stateProvider, triMenuProvider) {
+
+        $stateProvider
+            .state('triangular.timeline', {
+                url: '/timeline',
+                data: {
+                    permissions: {
+                        only: ['study']
+                    }
+                },
+                templateUrl: 'app/page/study/timeline/timeline.html',
+                controller: 'TimelineController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.messaging', {
+                url: '/messaging',
+                data: {
+                    permissions: {
+                        only: ['study']
+                    }
+                },
+                templateUrl: 'app/page/study/messaging/messaging.html',
+                controller: 'MessagingController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.chat', {
+                url: '/chat/:chatID',
+                templateUrl: 'app/page/study/messaging/messaging.chat.html',
+                controller: 'ChatController',
+                controllerAs: 'vm',
+                params: {
+                    chatID: null
+                }
+            });
+            /*
+            .state('triangular.chat', {
+                url: '/mail/:chatID',
+                templateUrl: 'app/page/study/messaging/messaging.chat.html',
+                controller: 'ChatController',
+                controllerAs: 'vm',
+                resolve: {
+                    contact: function($stateParams) {
+                        return $stateParams.chatID;
+                    }
+                }
+            });
+             */
+
+
+        triMenuProvider.addMenu({
+            name: 'Prepare For Study',
+            icon: 'fa fa-book',
+            type: 'dropdown',
+            priority: 2,
+            permission: 'study',
+            children: [{
+                name: 'Non-JUPAS Timeline',
+                icon: 'zmdi zmdi-time',
+                permission: 'non-jupas timeline',
+                state: 'triangular.timeline',
+                type: 'link'
+            },
+
+            {
+                name: 'Messaging',
+                icon: 'zmdi zmdi-comments',
+                permission: 'messaging',
+                state: 'triangular.messaging',
+                type: 'link'
+            }
+            ]
+        });
+    }
+})();

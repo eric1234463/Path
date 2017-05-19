@@ -1,0 +1,6 @@
+<div class="md-content md-padding">
+    <form name="eventForm" ng-submit="vm.submit()">
+        
+        
+    </form>
+</div>

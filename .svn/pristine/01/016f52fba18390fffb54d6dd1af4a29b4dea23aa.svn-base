@@ -1,0 +1,13 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.mentorship')
+        .controller('UploadNoteController', UploadNoteController);
+
+    function UploadNoteController(MentorshipService, $localStorage) {
+    	var vm = this;        
+
+    }
+
+})();

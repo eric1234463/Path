@@ -1,0 +1,34 @@
+<div class="md-content md-padding">
+    <md-tabs class="md-primary" md-selected="selectedTabIndex" id="case">
+        <md-tab ng-repeat="school in vm.schoolList" label="{{school.schoolName}}" aria-label="{{school.schoolName}}">
+            <md-toolbar class="md-table-toolbar md-default">
+                <div class="md-toolbar-tools">
+                    <span translate>{{school.schoolName}}</span>
+                </div>
+            </md-toolbar>
+            <!-- exact table from live demo -->
+            <md-table-container>
+                <table md-table>
+                    <thead md-head md-order="vm.query.order">
+                        <tr md-row>
+                            <th md-column>ProgrammeName</th>
+                            <th md-column md-numeric>Number of<br>Choices</th>
+                            <th md-column md-numeric>DSE</th>
+                            <th md-column md-numeric>CGPA</th>
+                            <th md-column md-numeric>Standard<br>Deviation</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row md-select="choice" md-auto-select ng-repeat="choice in school.choiceList">
+                            <td md-cell>{{choice.programName}}</td>
+                            <td md-cell>{{choice.choiceCount}}</td>
+                            <td md-cell>{{choice.dse}}</td>
+                            <td md-cell>{{choice.gpa}}</td>
+                            <td md-cell>{{choice.sd}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+        </md-tab>
+    </md-tabs>
+</div>

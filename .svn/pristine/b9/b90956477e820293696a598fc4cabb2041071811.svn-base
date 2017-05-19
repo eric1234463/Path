@@ -1,0 +1,26 @@
+<div layout="row" layout-xs="column" layout-margin>
+    <div class="calendar-page" flex>
+        <div class="margin-bottom-60" flex ui-calendar="vm.calendarOptions" ng-model="vm.eventSources" calendar="triangular-calendar" class="triangular-calendar"></div>
+    </div>
+
+        <md-list flex>
+            <md-subheader>Appointment List</md-subheader>
+            <md-list-item class="md-3-line" ng-repeat="appoint in vm.appointList">
+                <img ng-src="{{appoint.icon}}" class="md-avatar" />
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{ appoint.name }}</h3>
+                    <h4>{{ appoint.date }}</h4>
+                    <p>{{ appoint.time }}</p>
+                </div>
+                <div layout-xs="column">
+                    <md-button class="md-raised md-accent" aria-label="flat button" ng-click="vm.accept(appoint.id)">Accept
+                        <md-icon md-font-icon="zmdi zmdi-check"></md-icon>
+                    </md-button>
+                    <md-button class="md-raised md-warn" aria-label="flat button"  ng-click="vm.reject()">Reject
+                        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                    </md-button>
+                </div>
+            </md-list-item>
+        </md-list>
+
+</div>

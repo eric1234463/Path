@@ -1,0 +1,21 @@
+<div layout="row" layout-align="center">
+    <md-card>
+        <md-card-header>
+            <h5>Make Appointment</h5>
+        </md-card-header>
+        <md-card-content>
+            <form name="newchoice" ng-submit="vm.create()">
+                <md-datepicker ng-model="vm.date" md-placeholder="Date of Offer" required></md-datepicker>
+                <md-input-container class="md-block">
+                    <md-select ng-model="vm.appointment.time" placeholder="Choose Appropriate Time" required>
+                        <md-option ng-repeat="time in vm.timings" ng-value="time">{{time}}</md-option>
+                    </md-select>
+
+                </md-input-container>
+                <div layout="row" layout-align="end center">
+                    <md-button class="md-primary md-raised" type="submit">Create</md-button>
+                </div>
+            </form>
+        </md-card-content>
+    </md-card>
+</div>

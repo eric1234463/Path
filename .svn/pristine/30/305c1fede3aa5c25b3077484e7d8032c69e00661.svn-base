@@ -1,0 +1,31 @@
+<div layout="row" layout-xs="column" layout-margin>
+        <tri-widget flex="50" title="Contacts" contacts-widget content-layout="row">
+                    <md-list flex>
+                        <md-list-item ng-repeat="contact in vm.contacts">
+                            <img class="md-avatar" ng-src="{{contact}}" alt="{{contact}}">
+                            <p>{{contact}}</p>
+                            <md-icon md-font-icon="zmdi zmdi-chat" class="md-primary"></md-icon>
+                            <md-divider ng-hide="$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </tri-widget>
+        <tri-widget chat-widget flex class="widget-chat" title="Chat" content-layout="column" content-layout-align="space-between">
+            <md-divider></md-divider>
+            <md-list class="padding-top-20 padding-bottom-0" flex>
+                <md-list-item ng-repeat="chat in ::conversation" class="md-3-line" ng-class="userClass($even)" ng-init="userColor = $even ? 'cyan' : 'light-green'">
+                    <img class="md-avatar" ng-src="{{::chat.image}}" alt="{{::chat.name}}">
+                    <div class="md-list-item-text">
+                        <p palette-background="{{::userColor}}:200" ng-repeat="message in ::chat.messages">
+                           {{::message}}
+                        </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+            <div layout="row" layout-align="space-between center">
+                <md-input-container flex class="margin-left-20 margin-right-20">
+                    <label>Message</label>
+                    <input type="text">
+                </md-input-container>
+            </div>
+        </tri-widget>
+    </div>

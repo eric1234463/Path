@@ -1,0 +1,38 @@
+{
+  "name": "angular-pdfjs-viewer",
+  "description": "Embed PDF.js viewer into your angular application",
+  "homepage": "http://github.com/legalthings/angular-pdfjs-viewer",
+  "license": "MIT",
+  "authors": [
+    "LegalThings <info@legalthings.net>",
+    "Moesjarraf <moesjarraf@gmail.com>",
+    "Arnold Daniels <arnold@jasny.net>"
+  ],
+  "main": "dist/angular-pdfjs-viewer.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/legalthings/angular-pdfjs-viewer.git"
+  },
+  "dependencies": {
+    "angular": "~1.5.8",
+    "pdf.js-viewer": "~0.3.0"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "spec",
+    "**/*.spec.js"
+  ],
+  "version": "0.7.4",
+  "_release": "0.7.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.7.4",
+    "commit": "451c39b8852cb00e1afbc7c1d87cba15e8e89a53"
+  },
+  "_source": "https://github.com/legalthings/angular-pdfjs-viewer.git",
+  "_target": "^0.7.4",
+  "_originalSource": "angular-pdfjs-viewer",
+  "_direct": true
+}

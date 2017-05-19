@@ -1,0 +1,49 @@
+(function() {
+    'use strict';
+
+    angular.module('app.main.study')
+        .controller('ChatController', ChatController);
+
+    /* @ngInject */
+    function ChatController(StudyService, AccountService, $localStorage, $state, returnChat, accountImg, $stateParams, $interval, $timeout) {
+        var vm = this;
+        vm.currentUser = $localStorage.currentUser;
+        vm.baseState = $state.current;
+        vm.returnChat = returnChat;
+        vm.returnUrl = accountImg;
+        vm.sendMessage = sendMessage;
+
+
+        StudyService.getMessage(returnChat).then(function(response) {
+            vm.chatList = response.data;
+        });
+
+        $interval(function(){
+            StudyService.getMessage(returnChat).then(function(response) {
+                vm.chatList = response.data;
+                console.log("running");
+        })}, 500);
+
+      
+
+        // returns back to email list
+
+        function sendMessage() {
+            var currentdate = new Date();
+            var myObj = {};
+            myObj["ChatId"] = vm.returnChat;
+            myObj["MessageId"] = "x";
+            myObj["SenderId"] = vm.currentUser.accountID; //currentdate.getDate()
+            myObj["Message"] = vm.textMessage;
+            myObj["MessageTime"] = currentdate.getFullYear() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate.getDate() + " " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+            myObj["AccountIcon"] = vm.currentUser.avatar;
+            vm.chatList.push(myObj);
+            // var json = JSON.stringify(myObj);
+            if (vm.textMessage != null) {
+                StudyService.sendMessage(vm.returnChat, vm.currentUser.accountID, vm.textMessage, myObj["MessageTime"]);
+            }
+            vm.textMessage = null;
+        }
+    }
+
+})();

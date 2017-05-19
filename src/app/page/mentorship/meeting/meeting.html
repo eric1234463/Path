@@ -1,0 +1,60 @@
+<div class="dashboard-social-header padding-20 padding-top-100 overlay-gradient-30" layout="row" layout-align="start center" style="background: url(assets/images/backgrounds/material-backgrounds/mb-bg-02.jpg) no-repeat; background-size: cover;">
+    <div class="margin-right-20">
+        <img src={{vm.mentor.avatar}} alt="girl-avatar" class="make-round" width="100" />
+    </div>
+    <div class="text-light">
+        <h3 class="font-weight-600 margin-bottom-0 text-light">Meeting with your mentor:</h3>
+        <h3 class="font-weight-300 margin-bottom-0 text-light">{{vm.mentor.displayName}}</h3>
+    </div>
+</div>
+<md-tabs md-dynamic-height md-border-bottom>
+    <md-tab>
+        <md-tab-label layout="column">
+            <span>Meeting Detail</span>
+        </md-tab-label>
+        <md-tab-body>
+            <div layout="row" layout-xs="column" layout-margin>
+                <tri-widget class="flex" flex="70" flex-xs="100" title="Information" content-layout="column" content-layout-align="start center">
+                    <md-divider></md-divider>
+                    <md-list>
+                        <md-list-item class="md-2-line">
+                            <md-icon md-font-icon="fa fa-comment"></md-icon>
+                            <p class="md-subhead">Topic: {{vm.meeting.topic}}</p>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon md-font-icon="zmdi zmdi-pin"></md-icon>
+                            <p class="md-subhead">Location: {{vm.meeting.location}}</p>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon md-font-icon="fa fa-calendar"></md-icon>
+                            <p class="md-subhead">Meeting Date: {{vm.meeting.meetingDate}}</p>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon md-font-icon="zmdi zmdi-time"></md-icon>
+                            <p class="md-subhead">Meeting Time: {{vm.meeting.meetingTime}}</p>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon md-font-icon="zmdi zmdi-alert-polygon"></md-icon>
+                            <p class="md-subhead">Reminds: {{vm.meeting.reminder}}</p>
+                        </md-list-item>
+                    </md-list>
+                </tri-widget>
+                <div flex layout="column">
+                    <tri-widget flex class="margin-bottom-10" title="Participant" content-layout="column" content-layout-align="space-around" palette-background="triCyan:500">
+                        <md-divider></md-divider>
+                        <md-list>
+                            <md-list-item class="md-2-line" ng-repeat="student in vm.meeting.participant">
+                                <img ng-src="{{student.icon}}" class="md-avatar" />
+                                <div class="md-list-item-text">
+                                    <h3>{{student.name}}</h3>
+                                    <md-icon md-font-icon="zmdi zmdi-account-add" ng-click="doSecondaryAction($event)" class="md-secondary md-hue-3"></md-icon>
+                                </div>
+                                <md-divider ng-hide="::$last"></md-divider>
+                            </md-list-item>
+                        </md-list>
+                    </tri-widget>
+                </div>
+            </div>
+        </md-tab-body>
+    </md-tab>
+</md-tabs>

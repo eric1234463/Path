@@ -1,0 +1,21 @@
+#meeting{
+	padding-left: 25px;
+	padding-right: 20px;
+	padding-top: 10px;
+	width: 85%
+	
+}
+
+#info{
+  font-size: 3.5em;
+}
+
+#top{
+	font-size: 1.1em;
+}
+
+#mentor-card{
+	width: 400px;
+}
+
+

@@ -1,0 +1,44 @@
+<div class="md-content">
+    <div layout="row" layout-xs="column">
+        <tri-widget style='{{vm.background}}' id='background' twitter-widget class="md-whiteframe-z5 margin-10 text-center">
+            <div style="color: #FFF">
+                <div layout="row" layout-align="space-between center" class="padding-normal">
+                    <i class="zmdi zmdi-graduation-cap font-size-5">
+                    <h3 flex hide-xs class="md-subhead font-size-3">Path's Feed</h3>
+                </i>
+                    <div class="widget-buttons">
+                        <md-button class="md-icon-button" ng-click="vm.prevTweet()" aria-label="previous tweet">
+                            <md-icon md-font-icon="zmdi zmdi-chevron-left"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click="vm.nextTweet()" aria-label="next tweet">
+                            <md-icon md-font-icon="zmdi zmdi-chevron-right"></md-icon>
+                        </md-button>
+                    </div>
+                </div>
+                <div layout="column" class="padding-top-0 padding-left-30 padding-right-30 padding-bottom-30">
+                    <md-tabs md-selected="vm.selectedTab" class="dashboard-no-bar-tabs text-center" md-no-pagination md-no-bar md-dynamic-height>
+                        <md-tab ng-repeat="tweet in vm.tweets" label="tweet.id">
+                            <div ng-bind="tweet.body" linkify="twitter" class="font-size-2 font-style-bold line-height-big"></div>
+                        </md-tab>
+                    </md-tabs>
+                </div>
+            </div>
+        </tri-widget>
+    </div>
+    <div layout="row" layout-xs="column">
+        <tri-widget title="Offer In Your College In Current Year" class="md-whiteframe-z3 margin-10 text-center">
+            <div google-chart chart="vm.offerByType"></div>
+        </tri-widget>
+        <tri-widget title="Offer Per Year By School" class="md-whiteframe-z3 margin-10 text-center">
+            <canvas class="chart-line" chart-legend="true" chart-data="vm.offerByYearBySchool.data" chart-labels="vm.offerByYearBySchool.labels" chart-series="vm.offerByYearBySchool.series" chart-options="vm.offerByYearBySchool.options"></canvas>
+        </tri-widget>
+    </div>
+    <div layout="row" layout-xs="column">
+        <tri-widget title="Current Offer By School" class="md-whiteframe-z3 margin-10 text-center">
+            <canvas class="chart-doughnut" chart-data="vm.offerBySchool.data" chart-legend="true" chart-labels="vm.offerBySchool.labels"></canvas>
+        </tri-widget>
+        <tri-widget title="Offer Per Year" class="md-whiteframe-z3 margin-10 text-center">
+            <canvas class="chart-line" chart-legend="true" chart-data="vm.offerByYear.data" chart-labels="vm.offerByYear.labels" chart-series="vm.offerByYear.series" chart-options="vm.offerByYear.options"></canvas>
+        </tri-widget>
+    </div>
+</div>

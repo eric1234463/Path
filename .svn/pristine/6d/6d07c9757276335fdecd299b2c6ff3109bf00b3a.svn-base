@@ -1,0 +1,34 @@
+<md-toolbar md-scroll-shrink ng-if="true" flex-offset="5" id="toolbar" >
+    <div class="md-toolbar-tools">
+      <h5 style="font-weight: 700; color: #777777;">
+        <span>Up Coming Events</span>
+      </h5>
+    </div>
+</md-toolbar>
+<div layout="column" layout-xs="column">
+    <div ng-repeat="act in vm.acts">
+        <md-card layout="row" layout-xs="column" layout-align="space-around" id="card" flex-offset="5" >
+            <div layout="column" layout-xs="row" layout-align="space-around center" id="left">
+                <span class="md-subhead">{{act.startDate | date:'MMM'}}<hr/></span>
+              <span class="md-display-1" style="font-weight: 700; color: #777777">{{act.startDate | date:'dd'}}</span>
+
+                <span class="md-subhead">{{act.endDate | date:'MMM'}}<hr/></span>
+                <span class="md-display-1" style="font-weight: 700; color: #777777">{{act.endDate | date:'dd'}}</span>
+            </div>
+            <div id="photo" flex="35">
+                <img src="assets/images/events/grp.jpg" alt="Card Image">
+            </div>
+            <div flex="50" layout="column" layout-align="space-around" id="left">
+                <span class="md-headline" style="font-weight: 600; color: #777777">{{act.subject}}</span>
+                <span class="md-subhead">No. of people joined: {{act.participant}}</span>
+                <br/>
+                <span class="md-subhead">{{act.description}}</span>
+                <span><hr/></span>
+                <md-card-actions layout="row" layout-align="end">
+                    <md-button>View Event Details</md-button>
+                    <md-button>Join Event</md-button>
+                </md-card-actions>
+            </div>
+        </md-card>
+    </div>
+</div>

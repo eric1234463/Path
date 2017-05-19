@@ -1,0 +1,142 @@
+<div class="full-image-background mb-bg-03 padding-30  overlay-gradient-30" layout="row" layout-align="center start">
+    <div class="margin-right-20">
+        <img ng-src="{{vm.currentUser.avatar}}" alt="girl-avatar" class="make-round" width="100" />
+    </div>
+    <div class="text-light">
+        <h3 class="font-weight-600 margin-bottom-0 text-light">{{vm.currentUser.displayName}}</h3>
+    </div>
+</div>
+<div layout="row" class="profile" layout-wrap>
+    <div flex="100" flex-gt-md="100">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Profile">
+                <md-content class="md-padding">
+                    <md-card-content>
+                        <form name="profile">
+                            <div>
+                                <label for="name">Username</label>
+                                <p class="md-caption">{{vm.currentUser.displayName}}</p>
+                                <label for="School">School</label>
+                                <p class="md-caption">{{vm.currentUser.schoolName}}</p>
+                                <label for="Program">Study Program</label>
+                                <p class="md-caption">{{vm.currentUser.programName}} -- Year {{vm.currentUser.year}} </p>
+                                <label for="CGPA">CGPA</label>
+                                <p class="md-caption">{{vm.currentUser.cgpa}} </p>
+                                <label for="Role">Role</label>
+                                <p class="md-caption">{{vm.currentUser.roles[0]}}</p>
+                                <label for="Skills">Skills</label>
+                                <p class="md-caption" ng-repeat="data in vm.currentUser.skills">{{data}}</p>
+                            </div>
+                        </form>
+                    </md-card-content>
+                </md-content>
+            </md-tab>
+            <md-tab label="Password">
+                <md-content class="md-padding">
+                    <form name="password">
+                        <md-input-container class="md-block">
+                            <label for="password" translate>new password</label>
+                            <input id="password" label="password" name="password" type="password" ng-model="vm.user.password" tri-same-password="password.confirm" ng-minlength="8" required/>
+                            <div ng-messages="password.password.$error" md-auto-hide="false" ng-show="password.password.$touched">
+                                <div ng-message="required">Please enter a password</div>
+                                <div ng-message="minlength">Your password must be greater than 8 characters long</div>
+                                <div ng-message="samePassword">You need to enter the same password</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label for="confirm" translate>confirm password</label>
+                            <input id="confirm" label="confirm" name="confirm" type="password" ng-model="vm.user.confirm" tri-same-password="password.password" ng-minlength="8" required/>
+                            <div ng-messages="password.confirm.$error" md-auto-hide="false" ng-show="password.confirm.$touched">
+                                <div ng-message="required">Please enter a password</div>
+                                <div ng-message="minlength">Your password must be greater than 8 characters long</div>
+                                <div ng-message="samePassword">You need to enter the same password</div>
+                            </div>
+                        </md-input-container>
+                        <md-button class="md-raised md-primary" ng-disabled="password.$invalid" ng-click="vm.updatePassword()">Update Password</md-button>
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="Personal Information">
+                <md-input-container class="md-block ">
+                    <md-button class="md-raised md-primary" aria-label="flat button" ng-disabled="vm.editMode" ng-click="vm.editON()">Edit</md-button>
+                    <md-button class="md-raised md-primary" aria-label="flat button" ng-disabled="vm.save" ng-click="vm.upDate()">Save</md-button>
+                </md-input-container>
+                <md-content class="md-padding">
+                    <form name='personal'>
+                        <div>
+                            <md-input-container class="md-block ">
+                                <label for="name ">Username</label>
+                                <input id="name " label="name " name="name" type="text" ng-model="vm.currentUser.displayName" ng-disabled="vm.editMode == false" required />
+                                <div ng-messages="personal.name.$error" md-auto-hide="false" ng-show="personal.name.$touched">
+                                    <div ng-message="required">Please enter your name</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block ">
+                                <label for="CGPA ">CGPA</label>
+                                <input id="CGPA " label="CGPA " name="CGPA" ng-model="vm.currentUser.cgpa" ng-disabled="vm.editMode == false" required/>
+                                <div ng-messages="personal.CGPA.$error" md-auto-hide="false" ng-show="personal.CGPA.$touched">
+                                    <div ng-message="required">Please enter your CGPA</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container>
+                                <table width="400%">
+                                    <tr>
+                                        <td>
+                                            <label for="skills ">Skills</label>
+                                            <input type="text" label="skills" name="skills" ng-model="vm.inData" ng-disabled="vm.editMode == false" required/>
+                                            <div ng-messages="personal.skills.$error" md-auto-hide="false" ng-show="personal.skills.$touched">
+                                                <div ng-message="required">Please enter your skill</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <md-button class="md-fab md-primary" aria-label="add" ng-click="vm.add()" ng-disabled="vm.editMode == false ||!vm.inData">
+                                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                                            </md-button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="data in vm.currentUser.skills">
+                                        <td>{{data}}</td>
+                                        <td>
+                                            <md-button class="md-fab md-primary" aria-label="delete" ng-click="vm.del(data)" ng-disabled="vm.editMode == false">
+                                                <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+                                            </md-button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </md-input-container>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="Icon">
+                <md-content class="md-padding">
+                    <md-card-content>
+                        <img ng-src="{{vm.currentUser.avatar}}">
+                        <form name="myForm2">
+                            <fieldset>
+                                <legend>Upload Icon</legend>
+                                <br>Photo:
+                                <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
+                                <i ng-show="myForm.file.$error.required">*required</i>
+                                <br>
+                                <i ng-show="myForm.file.$error.maxSize">File too large. The max 2M</i>
+                                <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb" style="width:304px;height:228px;">
+                                <br>
+                                <md-input-container class="md-block ">
+                                    <md-button class="md-raised md-primary" aria-label="flat button" ng-disabled="!myForm2.$valid" ng-click="vm.uploadPic(picFile)">Submit</md-button>
+                                    <md-button class="md-raised md-primary" aria-label="flat button" ng-show="picFile" ng-click="picFile = null">Remove</md-button>
+                                </md-input-container>
+                                <span class="progress" ng-show="picFile.progress >= 0">
+                                    <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
+                                </span>
+                                <span ng-show="picFile.result">Upload Successful</span>
+                                <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                            </fieldset>
+                            <br>
+                        </form>
+                    </md-card-content>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </div>
+</div>

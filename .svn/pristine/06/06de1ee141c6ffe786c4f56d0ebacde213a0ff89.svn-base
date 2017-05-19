@@ -1,0 +1,56 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.admin')
+        .controller('SetUsersPermissionController', SetUsersPermissionController);
+
+    function SetUsersPermissionController(AdminService, $mdToast) {
+        var vm = this;
+        vm.update = update;
+        vm.showToast = showToast;
+
+        vm.query = {
+            filter: '',
+            limit: '',
+            order: '-id',
+            page: 1
+        };
+
+            function getAllFunction(){
+                AdminService.getAllFunction(1).then(function(response) {
+                    vm.functionList = response.data;
+                });
+                AdminService.getAllFunction(2).then(function(response) {
+                    vm.functionList2 = response.data;
+                });
+            }
+
+            function update(){
+                var obj;
+                for(var i = 0 ; i < vm.functionList.length; i++){
+                     obj = vm.functionList[i];
+                    AdminService.update_S(obj.userRoleID,obj.own);
+                }
+
+                for(var j = 0 ; j< vm.functionList2.length; j++){
+                     var obj2 = vm.functionList2[j];
+                    AdminService.update_M(obj2.userRoleID,obj2.own);
+                }
+            }
+
+        function showToast($event, position) {
+            var $button = angular.element($event.currentTarget);
+            $mdToast.show({
+                template: '<md-toast><span flex>All Changes Have been Saved.</span></md-toast>',
+                position: position,
+                hideDelay: 3000,
+                parent: $button.parent()
+            });
+        }
+        
+        getAllFunction();
+
+    }
+
+})();

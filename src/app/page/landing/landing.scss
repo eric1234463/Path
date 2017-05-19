@@ -1,0 +1,133 @@
+#landing {
+    #imgview {
+        height: 65vh;
+        display: block;
+        margin: 0 auto;
+        opacity: 1;
+    }
+    #phoneview {
+        height: 65vh;
+        display: block;
+        margin: 0 auto;
+        opacity: 1;
+    }
+    #big {
+        font-size: 9em;
+        color: #FFF !important;
+    }
+    #big2 {
+        font-size: 7em;
+        color: #FFF !important;
+    }
+    #big3 {
+        font-size: 2em;
+        color: #FFF !important;
+    }
+    #navbar-logo {
+        height: 50px;
+        width: 50px;
+        margin-top: 5px;
+    }
+    #bg {
+        height: 100vh;
+        div {
+            display: block;
+            margin: 0 auto;
+        }
+        #title {
+            font-weight: 300;
+            font-size: 6em;
+            opacity: 1;
+            text-align: left;
+            color: #fff;
+        }
+        #description {
+            font-size: 4rem;
+            opacity: 1;
+            text-align: left;
+            color: #fff;
+        }
+        #comment {
+            font-size: 4rem;
+            font-weight: 200;
+            opacity: 1;
+            text-align: left;
+            color: #fff;
+        }
+    }
+    #headline {
+        color: #fff;
+        font-size: 3rem;
+        font-weight: 300;
+    }
+    #dark-headline {
+        color: #505050;
+        font-size: 3rem;
+        font-weight: 300;
+    }
+    #dark-subtitle {
+        color: #505050;
+        font-size: 2rem;
+        word-wrap: break-word;
+        font-weight: 300;
+    }
+    #subtitle {
+        color: #fff;
+        font-size: 2rem;
+        word-wrap: break-word;
+        font-weight: 300;
+    }
+    #card {
+        box-shadow: none;
+    }
+    #text {
+        color: #000000;
+    }
+    #text2 {
+        color: #FFF;
+        font-size: 2.5rem;
+        text-align: center;
+        font-weight: 200;
+    }
+    #topbar {
+        position: fixed;
+        z-index: 2;
+    }
+    .wtext {
+        color: #FFFFFF;
+    }
+    @keyframes fadeOut {
+        from {
+            background-color: #2196F3;
+        }
+        to {
+            background-color: transparent;
+        }
+    }
+    .fadeOut {
+        animation-name: fadeOut;
+        animation-duration: 0.7s;
+        animation-fill-mode: forwards;
+    }
+    @keyframes fadeIn {
+        from {
+            background-color: transparent;
+        }
+        to {
+            background-color: #2196F3;
+        }
+    }
+    .fadeIn {
+        animation-name: fadeIn;
+        animation-duration: 0.7s;
+        animation-fill-mode: forwards;
+    }
+    #left {
+        width: 450px;
+    }
+    #big-fab {
+        height: 150px;
+        width: 150px;
+        z-index: 1;
+    }
+}

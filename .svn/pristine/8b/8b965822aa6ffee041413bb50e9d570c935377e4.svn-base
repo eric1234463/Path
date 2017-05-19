@@ -1,0 +1,47 @@
+<div class="md-content md-padding">
+    <h2>Share Your Choice</h2>
+    <form name="newchoice" ng-submit="vm.create()">
+        <md-input-container class="md-block">
+            <label for="school">Target University</label>
+            <md-icon class="md-accent" md-font-icon="zmdi zmdi-graduation-cap"></md-icon>
+            <md-select id="school" name="school" label="school" ng-model="vm.choice.school" placeholder="Target University" ng-change="vm.getProgramList()" required>
+                <md-option ng-value="{{school.schoolID}}" ng-repeat="school in vm.schoolList">{{school.schoolName}}</md-option>
+            </md-select>
+            <div ng-messages for="newchoice.school.$error" md-auto-hide="false" ng-show="newchoice.school.$touched">
+                <div ng-message when="required">Please Choose Your School</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label for="program">Target Degree Program</label>
+            <md-icon class="md-accent" md-font-icon="zmdi zmdi-library"></md-icon>
+            <md-select id="program" name="program" label="program" ng-model="vm.choice.program" placeholder="Target Degree Program" ng-disabled="vm.choice.school == 0" required>
+                <md-option ng-value="{{program.programID}}" ng-repeat="program in vm.programList">{{program.programName}}</md-option>
+            </md-select>
+            <div ng-messages for="newchoice.program.$error" md-auto-hide="false" ng-show="newchoice.program.$touched">
+                <div ng-message when="required"> Please Choose Your Program </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label for="dse">Your DSE Total</label>
+            <md-icon class="md-accent" md-font-icon="zmdi zmdi-assignment"></md-icon>
+            <input id="dse" name="dse" label="dse" type="number" ng-model="vm.choice.dse" ng-maxlength="2" required>
+            <div ng-messages for="newchoice.dse.$error" md-auto-hide="false" ng-show="newchoice.dse.$touched">
+                <div ng-message when="required">Please Type Your DSE Grade</div>
+                <div ng-message="maxlength">DSE result cannot be greater than 2 digit</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label name="gpa">Your GPA</label>
+            <md-icon class="md-accent" md-font-icon="zmdi zmdi-assignment"></md-icon>
+            <input label="gpa" name="gpa" id="gpa" type="number" ng-model="vm.choice.gpa" ng-maxlength="3" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.1" required>
+            <div ng-messages for="newchoice.gpa.$error" md-auto-hide="false" ng-show="newchoice.gpa.$touched">
+                <div ng-message when="required">Please Type Your Current GPA</div>
+                <div ng-message="maxlength">GPA cannot be greater than 3 digit</div>
+                <div ng-message="pattern">GPA Patterm Wrong</div>
+            </div>
+        </md-input-container>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="newchoice.$invalid" type="submit">Create</md-button>
+        </div>
+    </form>
+</div>

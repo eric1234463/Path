@@ -1,0 +1,45 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.admin')
+        .controller('TimlineManagementController', TimlineManagementController);
+
+    function TimlineManagementController(AdminService, $mdDialog) {
+        var vm = this;
+        vm.editMode = false;
+        vm.editON = editON;
+        vm.save = true;
+        vm.submit = submit;
+        vm.cancel = cancel;
+        AdminService.getEventList().then(function(response) {
+            vm.eventList = response.data;
+        });
+
+        function editON() {
+            vm.editMode = true;
+            vm.save = false;
+        }
+
+        function cancel() {
+            vm.editMode = false;
+            vm.save = true;
+        }
+
+        function submit() {
+            // vm.editMode = false;
+            // vm.save = true;
+            // for (var i = 0; i < vm.schoolList.length; i++) {
+            //     AdminService.setSchool(vm.schoolList[i]);
+            // }
+
+            // $mdDialog.show(
+            //     $mdDialog.alert()
+            //     .title('Update Success')
+            //     .textContent('You Already Update the School Information!')
+            //     .ok('Ok')
+            // );
+        }
+    }
+
+})();

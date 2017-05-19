@@ -1,0 +1,19 @@
+#icon{
+text-align: center;
+
+}
+
+
+
+#name{
+	font-size:20px;
+}
+
+#group{
+	font-weight:bold;
+	color: #777777;
+}
+
+#table{
+  height:470px;
+}

@@ -1,0 +1,56 @@
+<div class="md-content md-padding">
+    <md-tabs class="md-primary" md-selected="selectedTabIndex" id="case">
+        <md-tab ng-repeat="school in vm.schoolList" label="{{school.schoolName}}" aria-label="{{school.schoolName}}">
+            <form name="schoolForm" ng-submit="vm.submit()">
+                <div class='row'>
+                    <md-button class="md-raised md-primary" aria-label="flat button" ng-disabled="vm.editMode" ng-click="vm.editON()">Edit</md-button>
+                    <md-button class="md-raised md-primary" type="submit" aria-label="flat button" ng-disabled="vm.save">Save</md-button>
+                    <md-button class="md-raised md-primary" type="button" ng-disabled="vm.save" aria-label="flat button" ng-click="vm.cancel()">Cancel</md-button>
+                </div>
+                <div class='row'>
+                    <md-toolbar class="md-table-toolbar md-default">
+                        <div class="md-toolbar-tools">
+                            <span translate>{{school.schoolName}}</span>
+                        </div>
+                    </md-toolbar>
+                    <md-table-container>
+                        <table md-table>
+                            <thead md-head>
+                                <tr md-row>
+                                    <th md-column>ProgramID</th>
+                                    <th md-column>ProgramName</th>
+                                    <th md-column>ProgramType</th>
+                                </tr>
+                            </thead>
+                            <tbody md-body>
+                                <tr md-row md-auto-select ng-repeat="program in school.programList">
+                                    <td md-cell>
+                                        <div ng-bind-html="program.programID"></div>
+                                    </td>
+                                    <td md-cell>
+                                        <div ng-bind-html="program.programName" ng-if="vm.editMode == false"></div>
+                                        <md-input-container class="md-block" md-no-float ng-if="vm.editMode == true">
+                                            <label for="ProgramName" translate>SchoolName</label>
+                                            <input type="text" name="ProgramName" ng-model="program.programName" required />
+                                            <div ng-messages="schoolForm.ProgramName.$error" md-auto-hide="false" ng-show="schoolForm.ProgramName.$touched">
+                                                <div ng-message when="required"><span>Please enter your ProgramName.</span></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td md-cell>
+                                        <div ng-bind-html="program.programTypeID" ng-if="vm.editMode == false"></div>
+                                        <md-input-container class="md-block" md-no-float ng-if="vm.editMode == true">
+                                            <md-select id="program" name="program" label="program" ng-model="program.programTypeID" placeholder="ProgramType Name" required>
+                                                <md-option ng-value="{{programType.programTypeID}}" ng-repeat="programType in vm.programTypeList">{{programType.programTypeName}}</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+                </div>
+            </form>
+        </md-tab>
+    </md-tabs>
+</div>

@@ -1,0 +1,23 @@
+<md-content class="md-padding full-width">
+    <md-card>
+            <tri-widget flex class="widget-chat" title="Chat" content-layout="column" content-layout-align="space-between">
+            <md-divider></md-divider>
+            <md-list class="padding-top-20 padding-bottom-0" flex>
+                <md-list-item ng-repeat="x in ::vm.chatList" class="md-3-line" ng-class="vm.userClass($even, x.SenderId)" ng-init="userColor = $even ? 'cyan' : 'light-green'">
+                    <img class="md-avatar" ng-src="{{vm.getImage(x.SenderId)}}" alt="{{::chat.name}}">
+                    <div class="md-list-item-text">
+                        <p palette-background="{{::userColor}}:200">
+                           {{::x.Message}}
+                        </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+            <div layout="row" layout-align="space-between center">
+                <md-input-container flex class="margin-left-20 margin-right-20">
+                    <label>Message</label>
+                    <input type="text">
+                </md-input-container>
+            </div>
+        </tri-widget>
+</md-card>
+</md-content>

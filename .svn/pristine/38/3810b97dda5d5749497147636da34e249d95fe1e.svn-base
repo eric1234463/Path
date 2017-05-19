@@ -1,0 +1,26 @@
+
+#card{
+	width: 90%;
+	margin-top: 15px;
+
+#left{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#photo{
+	width: 30%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+}
+
+#toolbar{
+	margin-top: 15px;
+	width:90%;
+	background-color: transparent;
+	border-style: solid;
+    border-width: 1px 0px 1px 0px;
+	border-color: rgba(100, 100, 100, 0.6);
+}

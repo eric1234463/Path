@@ -1,0 +1,28 @@
+// Single Email
+.email-single {
+  background: transparent !important;
+  md-toolbar {
+    padding: 16px;
+    .email-single-title {
+    	> span {
+    		display: block;
+    	}
+    }
+  }
+}
+
+#ui-admin-email {
+  &.ng-enter {
+    @include slideInRight();
+  }
+  &.ng-leave {
+    @include slideOutRight();
+  }
+}
+
+// Dashboard Container
+.dashboard-container {
+  .layout-margin {
+    margin: 0px;
+  }
+}

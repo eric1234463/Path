@@ -1,0 +1,20 @@
+angular
+    .module('app.main.study', [])
+    .factory('StudyService', function($http) {
+        return {
+            getTimeLine : function() {
+                var query = $http.get('http://unicomhk.net/path2/php/study.php?action=getTimeLine');
+                return query;
+            },
+
+            getChatMessage : function() {
+            	var query = $http.get('http://unicomhk.net/path2/php/study.php?action=getChatMessage');
+                return query;
+            },
+
+            getChatRoom : function() {
+            	var query = $http.get('http://unicomhk.net/path2/php/study.php?action=getChatRoom');
+                return query;
+            }
+        };
+    });

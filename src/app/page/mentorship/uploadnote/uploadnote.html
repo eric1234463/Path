@@ -1,0 +1,23 @@
+<div class="md-content md-padding">
+    <form name="NoteForm">
+        <h2>Upload Mentor Notes</h2>
+        <md-input-container class="md-block">
+            <label for='noteName'>Note Name</label>
+            <input type="text" ng-model="vm.noteName" id="noteName" name="noteName" required>
+            <div ng-messages="NoteForm.noteName.$error" md-auto-hide="false" ng-show="NoteForm.noteName.$error">
+                <div ng-message="required">Please input the Note Name</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+           <label for='noteDesc'>Note Description</label>
+            <input type="text" ng-model="vm.noteDesc" id="noteDesc" name="noteDesc" required>
+            <div ng-messages="NoteForm.noteDesc.$error" md-auto-hide="false" ng-show="NoteForm.noteDesc.$error">
+                <div ng-message="required">Please input the Note Description</div>
+            </div>
+        </md-input-container>
+        <md-button class="md-primary md-raised" ngf-select="vm.upload($files)" accept="image/*" ng-model="vm.file" ngf-multiple="false" ngf-max-size="2MB" aria-label="upload">Upload</md-button>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary"  ng-disabled="!NoteForm.$valid" ng-click="vm.submit()">Create</md-button>
+        </div>
+    </form>
+</div>

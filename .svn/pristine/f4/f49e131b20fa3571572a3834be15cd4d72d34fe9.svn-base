@@ -1,0 +1,84 @@
+<?php
+require ("dbconn.php");
+session_start();
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+$dbconn = dbconn();
+if (!$dbconn) {
+    die("dbconnection failed: " . mysqli_dbconnect_error());
+} 
+else {
+	$action = $_GET['action'];
+	$data = Array();
+	switch ($action) {
+		case 'getChoiceList':
+			$sql ="SELECT * FROM DegreeSchool";
+			$result = mysqli_query($dbconn, $sql);
+			while ($row = mysqli_fetch_assoc($result)) {
+				$schoolID = $row['schoolID'];
+				$schoolName = $row['schoolName'];
+				$sql2 = "SELECT * FROM DegreeProgram WHERE schoolID = '$schoolID'";
+				$result2 = mysqli_query($dbconn, $sql2);
+				$choiceList = Array();
+				while ($row2 = mysqli_fetch_assoc($result2)) {
+					$gpa = 0;
+					$dse = 0;
+					$programID = $row2['programID'];
+					$programName = $row2['programName'];
+					$sql3 = "SELECT COUNT(*) As `choiceCount` ,AVG(gpa) AS `gpa`, STD(gpa) AS `sd`,AVG(dse) AS `dse` 
+							 FROM Choice WHERE degreeSchoolID = '$schoolID' AND degreeProgramID = '$programID'";
+					$result3 = mysqli_query($dbconn, $sql3);
+					while ($row3 = mysqli_fetch_assoc($result3)) {
+						$choiceCount = $row3['choiceCount'];
+						$gpa = $row3['gpa'];
+						$dse = $row3['dse'];
+						$sd = $row3['sd'];
+					}
+					$choiceList[] = array(
+						"programName" => $programName,
+						"choiceCount" => $choiceCount,
+						"gpa"=>round($gpa, 2),
+						"dse"=>round($dse, 2),
+						"sd"=>round($sd, 4)
+					);
+				}
+				$data[] = array("schoolName" => $schoolName,"choiceList" => $choiceList);
+			}
+			echo json_encode($data);
+			break;
+		case 'getSchoolList':
+			$sql ="SELECT * FROM DegreeSchool";
+			$result = mysqli_query($dbconn, $sql);
+			while ($row = mysqli_fetch_assoc($result)) {
+				$data[] = array(
+						"schoolName"=>$row['schoolName'],
+						"schoolID" => $row['schoolID']
+					);
+			}
+			echo json_encode($data);
+			break;
+		case 'getProgramList':
+			$schoolID = $_GET['schoolID'];
+			$sql ="SELECT * FROM DegreeProgram WHERE schoolID = '$schoolID'";
+			$result = mysqli_query($dbconn, $sql);
+			while ($row = mysqli_fetch_assoc($result)) {
+				$data[] = array(
+						"programName"=>$row['programName'],
+						"programID" => $row['programID']
+					);
+			}
+			echo json_encode($data);
+			break;
+
+		case 'createChoice':
+			$gpa = $_GET['gpa'];
+			$schoolID = $_GET['schoolID'];
+			$programID = $_GET['programID'];
+			$dse = $_GET['dse'];
+			$sql ="INSERT INTO Choice (degreeSchoolID,degreeProgramID,gpa,dse) VALUES ($schoolID,$programID,$gpa,$dse)";
+			$result = mysqli_query($dbconn, $sql);
+			break;
+	}
+	mysqli_close($dbconn);
+}
+?>

@@ -1,0 +1,29 @@
+<div class="md-padding" layout="row" layout-align="center center">
+    <div flex="50" layout="column">
+        <tri-widget flex title="Grouping Result" class="margin-bottom-10" content-layout="column" content-layout-align="space-around">
+            <md-divider></md-divider>
+            <md-list ng-repeat="student in vm.grp">
+                <md-list-item class="md-3-line">
+                <div flex="10" >
+                    <img ng-src="{{student.accountIcon}}" class="md-avatar" />
+                    <span>{{student.username}}</span>
+                    </div>
+                    <div class="md-list-item-text">
+                        <span class="body 2">Email: {{student.email}}</span>
+                        <h3>CGPA: {{student.cgpa}}</h3>
+                        <span>Skills:</span>
+                        <span class="status" ng-repeat="data in student.skills">{{data}}</span>
+                        <md-button href="/#/messaging" class="md-fab md-secondary">
+                            <md-icon md-font-icon="zmdi zmdi-comments">
+                        </md-button>
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+            <md-list-item>
+                    <md-button class="md-primary md-raised">Request for second-round</md-button>
+                    <md-button class="md-warn md-raised md-secondary">Quit the group</md-button>
+                </md-list-item>
+        </tri-widget>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="md-content md-padding">
+    <div layout="row" layout-xs="column" layout-wrap>
+        <counter-widget flex flex-sm="50" title="Student" count="vm.studentCount" icon="zmdi zmdi-face" background="red-A700" color="white"></counter-widget>
+        <counter-widget flex flex-sm="50" title="Mentor" count="vm.mentorCount" icon="zmdi zmdi-graduation-cap" background="blue-A700" color="white"></counter-widget>
+        <counter-widget flex flex-sm="50" title="Case" count="vm.caseCount" icon="zmdi zmdi-assignment-check" background="purple-A700" color="white"></counter-widget>
+        <counter-widget flex flex-sm="50" title="View" count="vm.viewCount" icon="zmdi zmdi-eye" background="teal-A700" color="white"></counter-widget>
+    </div>
+</div>

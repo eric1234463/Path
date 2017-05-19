@@ -1,0 +1,17 @@
+<div flex layout="column">
+    <tri-widget flex class="margin-bottom-10" title="Suggusted Groupmates" content-layout="column" content-layout-align="space-around">
+        <md-divider></md-divider>
+        <md-list>
+            <md-list-item class="md-2-line" ng-repeat="student in vm.grp">
+                <img ng-src="{{student.accountIcon}}" class="md-avatar" />
+                <div class="md-list-item-text">
+                    <h3>{{student.username}}</h3>
+                    <h3>E-mail: {{student.email}}</h3>
+                    <h3>CGPA: {{student.cgpa}}</h3>
+                    <md-icon md-font-icon="zmdi zmdi-comments" ng-click="doSecondaryAction($event)" class="md-secondary md-hue-3"></md-icon>
+                </div>
+                <md-divider ng-hide="::$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </tri-widget>
+</div>

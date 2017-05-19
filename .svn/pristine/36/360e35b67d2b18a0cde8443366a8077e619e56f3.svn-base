@@ -1,0 +1,44 @@
+<div flex layout="row">
+    <md-content flex="100" flex-gt-xs="50" flex-gt-lg="40">
+       <md-list class="inbox-list">
+            <div ng-repeat="contact in ::vm.data">
+                <md-subheader class="md-primary" ng-show="group.emails.length > 0">{{}}</md-subheader>
+                <md-list-item class="inbox-list__email inbox-list__email--animated md-3-line md-long-text" ng-repeat="contact in ::vm.data">
+                    <img class="md-avatar" ng-src="{{::contact.AccountIcon}}" alt="{{::chat.accountIcon}}">
+                    <div class="md-list-item-text" layout="column">
+                        <h3><span class="md-caption"></span>{{::contact["AccountName"]}}</h3>
+                        <h4>{{::contact["Message"]}}</h4>
+                        <p am-time-ago="message.time">{{::contact.MessageTime}}</p>
+                    </div>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </div>
+        </md-list>
+    </md-content>
+    <div class="md-whiteframe-z1 animate-wrapper" layout="column" layout-align="start center" flex>
+        <div flex id="ui-admin-email" ui-view layout="column" layout-align="start center" class="overflow-auto full-width">
+         <div flex class="inbox-no-email-selected" layout="column" layout-align="center">
+                <h2 hide-xs translate>No chat selected</h2>
+            </div>
+            <tri-widget chat-widget flex class="widget-chat" title="Chat" content-layout="column" content-layout-align="space-between">
+                <md-divider></md-divider>
+                <md-list class="padding-top-20 padding-bottom-0" flex>
+                    <md-list-item ng-repeat="data in ::vm.data" class="md-3-line" ng-class="userClass($even)" ng-init="userColor = $even ? 'cyan' : 'light-green'">
+                        <img class="md-avatar" ng-src="{{::chat.image}}" alt="{{::chat.name}}">
+                        <div class="md-list-item-text">
+                            <p palette-background="{{::userColor}}:200" ng-repeat="message in ::vm.message">
+                                {{::data.Message}}
+                            </p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <div layout="row" layout-align="space-between center">
+                    <md-input-container flex class="margin-left-20 margin-right-20">
+                        <label>Message</label>
+                        <input type="text">
+                    </md-input-container>
+                </div>
+            </tri-widget>
+        </div>
+    </div>
+</div>

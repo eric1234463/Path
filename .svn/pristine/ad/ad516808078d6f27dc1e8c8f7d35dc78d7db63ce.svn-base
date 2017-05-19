@@ -1,0 +1,30 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.authentication')
+        .controller('LogoutController', LogoutController);
+
+    /* @ngInject */
+    function LogoutController($state, triSettings, $http, AccountService, $mdDialog, $cookies) {
+
+        location.reload();
+
+        function removeCookies() {
+            $cookies.remove('accountID');
+            $cookies.remove('username');
+            $cookies.remove('displayName');
+            $cookies.remove('avatar');
+            $cookies.remove('schoolID');
+            $cookies.remove('programID');
+            $cookies.remove('schoolName');
+            $cookies.remove('programName');
+            $cookies.remove('roles');
+            $cookies.remove('year');
+            $cookies.remove('cgpa');            
+            $state.go('authentication.login');
+        }
+        removeCookies();
+    
+    }
+})();

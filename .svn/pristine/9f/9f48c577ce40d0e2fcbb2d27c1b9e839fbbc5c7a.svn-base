@@ -1,0 +1,16 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.mentorship')
+        .controller('ViewNoteController', ViewNoteController);
+
+    function ViewNoteController(MentorshipService, $localStorage) {
+    	var vm = this;
+    	MentorshipService.getNote().then(function(response) {
+    		vm.note=response.data;
+    	})            
+
+    }
+
+})();

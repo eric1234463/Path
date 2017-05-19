@@ -1,0 +1,53 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.analysis')
+        .controller('CreateCaseController', CreateCaseController);
+
+    function CreateCaseController(AnalysisService, $localStorage, $mdDialog, $filter) {
+        var vm = this;
+        vm.getProgramList = getProgramList;
+        vm.currentUser = $localStorage.currentUser;
+        vm.create = create;
+        vm.case = {
+            'school': '',
+            'program': '',
+            'yr1sem1': '',
+            'yr1sem2': '',
+            'yr2sem1': '',
+            'yr2sem2': '',
+            'ielts': '',
+            'dse': false,
+            'date': ''
+        };
+
+        AnalysisService.getSchoolList().then(function(response) {
+            vm.schoolList = response.data;
+        });
+
+        function getProgramList() {
+            AnalysisService.getProgramList(vm.case.school).then(function(response) {
+                vm.programList = response.data;
+            });
+        }
+
+        function create() {
+            if (vm.case.ielts == null){
+                vm.case.ielts =0;
+            }
+            vm.case.date = $filter('date')(new Date(vm.date), 'yyyy-MM-dd');
+            AnalysisService.createCase(vm.case, vm.currentUser.schoolID, vm.currentUser.programID, vm.currentUser.accountID);
+            $mdDialog.show(
+                $mdDialog.alert()
+                .title('Create Success')
+                .textContent('Thank You for your sharing')
+                .ok('Ok')
+            );
+
+        }
+
+
+    }
+
+})();

@@ -1,0 +1,45 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('app.main.admin')
+        .controller('SchoolController', SchoolController);
+
+    function SchoolController(AdminService, $mdDialog) {
+        var vm = this;
+        vm.editMode = false;
+        vm.editON = editON;
+        vm.save = true;
+        vm.submit = submit;
+        vm.cancel = cancel;
+        AdminService.getSchoolList().then(function(response) {
+            vm.schoolList = response.data;
+        });
+
+        function editON() {
+            vm.editMode = true;
+            vm.save = false;
+        }
+
+        function cancel() {
+            vm.editMode = false;
+            vm.save = true;
+        }
+
+        function submit() {
+            vm.editMode = false;
+            vm.save = true;
+            for (var i = 0; i < vm.schoolList.length; i++) {
+                AdminService.setSchool(vm.schoolList[i]);
+            }
+
+            $mdDialog.show(
+                $mdDialog.alert()
+                .title('Update Success')
+                .textContent('You Already Update the School Information!')
+                .ok('Ok')
+            );
+        }
+    }
+
+})();
