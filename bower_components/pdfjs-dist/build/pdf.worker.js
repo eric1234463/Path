@@ -23,8 +23,8 @@
  }
 }(this, function (exports) {
  'use strict';
- var pdfjsVersion = '1.6.414';
- var pdfjsBuild = '3b3a179';
+ var pdfjsVersion = '1.7.225';
+ var pdfjsBuild = '17d135f';
  var pdfjsFilePath = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : null;
  var pdfjsLibs = {};
  (function pdfjsWrapper() {
@@ -4363,7 +4363,7 @@
      this._isInvalid = true;
     }
     function IDNAToASCII(h) {
-     if ('' === h) {
+     if (h === '') {
       invalid.call(this);
      }
      return h.toLowerCase();
@@ -4421,7 +4421,7 @@
        case 'scheme':
         if (c && ALPHANUMERIC.test(c)) {
          buffer += c.toLowerCase();
-        } else if (':' === c) {
+        } else if (c === ':') {
          this._scheme = buffer;
          buffer = '';
          if (stateOverride) {
@@ -4430,7 +4430,7 @@
          if (isRelativeScheme(this._scheme)) {
           this._isRelative = true;
          }
-         if ('file' === this._scheme) {
+         if (this._scheme === 'file') {
           state = 'relative';
          } else if (this._isRelative && base && base._scheme === this._scheme) {
           state = 'relative or authority';
@@ -4452,10 +4452,10 @@
         }
         break;
        case 'scheme data':
-        if ('?' === c) {
+        if (c === '?') {
          this._query = '?';
          state = 'query';
-        } else if ('#' === c) {
+        } else if (c === '#') {
          this._fragment = '#';
          state = 'fragment';
         } else {
@@ -4474,7 +4474,7 @@
         }
         break;
        case 'relative or authority':
-        if ('/' === c && '/' === input[cursor + 1]) {
+        if (c === '/' && input[cursor + 1] === '/') {
          state = 'authority ignore slashes';
         } else {
          err('Expected /, got: ' + c);
@@ -4495,12 +4495,12 @@
          this._username = base._username;
          this._password = base._password;
          break loop;
-        } else if ('/' === c || '\\' === c) {
-         if ('\\' === c) {
+        } else if (c === '/' || c === '\\') {
+         if (c === '\\') {
           err('\\ is an invalid code point.');
          }
          state = 'relative slash';
-        } else if ('?' === c) {
+        } else if (c === '?') {
          this._host = base._host;
          this._port = base._port;
          this._path = base._path.slice();
@@ -4508,7 +4508,7 @@
          this._username = base._username;
          this._password = base._password;
          state = 'query';
-        } else if ('#' === c) {
+        } else if (c === '#') {
          this._host = base._host;
          this._port = base._port;
          this._path = base._path.slice();
@@ -4533,11 +4533,11 @@
         }
         break;
        case 'relative slash':
-        if ('/' === c || '\\' === c) {
-         if ('\\' === c) {
+        if (c === '/' || c === '\\') {
+         if (c === '\\') {
           err('\\ is an invalid code point.');
          }
-         if ('file' === this._scheme) {
+         if (this._scheme === 'file') {
           state = 'file host';
          } else {
           state = 'authority ignore slashes';
@@ -4554,7 +4554,7 @@
         }
         break;
        case 'authority first slash':
-        if ('/' === c) {
+        if (c === '/') {
          state = 'authority second slash';
         } else {
          err('Expected \'/\', got: ' + c);
@@ -4578,7 +4578,7 @@
         }
         break;
        case 'authority':
-        if ('@' === c) {
+        if (c === '@') {
          if (seenAt) {
           err('@ already seen.');
           buffer += '%40';
@@ -4586,11 +4586,11 @@
          seenAt = true;
          for (var i = 0; i < buffer.length; i++) {
           var cp = buffer[i];
-          if ('\t' === cp || '\n' === cp || '\r' === cp) {
+          if (cp === '\t' || cp === '\n' || cp === '\r') {
            err('Invalid whitespace in authority.');
            continue;
           }
-          if (':' === cp && null === this._password) {
+          if (cp === ':' && this._password === null) {
            this._password = '';
            continue;
           }
@@ -4602,7 +4602,7 @@
           }
          }
          buffer = '';
-        } else if (EOF === c || '/' === c || '\\' === c || '?' === c || '#' === c) {
+        } else if (c === EOF || c === '/' || c === '\\' || c === '?' || c === '#') {
          cursor -= buffer.length;
          buffer = '';
          state = 'host';
@@ -4612,7 +4612,7 @@
         }
         break;
        case 'file host':
-        if (EOF === c || '/' === c || '\\' === c || '?' === c || '#' === c) {
+        if (c === EOF || c === '/' || c === '\\' || c === '?' || c === '#') {
          if (buffer.length === 2 && ALPHA.test(buffer[0]) && (buffer[1] === ':' || buffer[1] === '|')) {
           state = 'relative path';
          } else if (buffer.length === 0) {
@@ -4623,7 +4623,7 @@
           state = 'relative path start';
          }
          continue;
-        } else if ('\t' === c || '\n' === c || '\r' === c) {
+        } else if (c === '\t' || c === '\n' || c === '\r') {
          err('Invalid whitespace in file host.');
         } else {
          buffer += c;
@@ -4631,14 +4631,14 @@
         break;
        case 'host':
        case 'hostname':
-        if (':' === c && !seenBracket) {
+        if (c === ':' && !seenBracket) {
          this._host = IDNAToASCII.call(this, buffer);
          buffer = '';
          state = 'port';
-         if ('hostname' === stateOverride) {
+         if (stateOverride === 'hostname') {
           break loop;
          }
-        } else if (EOF === c || '/' === c || '\\' === c || '?' === c || '#' === c) {
+        } else if (c === EOF || c === '/' || c === '\\' || c === '?' || c === '#') {
          this._host = IDNAToASCII.call(this, buffer);
          buffer = '';
          state = 'relative path start';
@@ -4647,9 +4647,9 @@
          }
          continue;
         } else if ('\t' !== c && '\n' !== c && '\r' !== c) {
-         if ('[' === c) {
+         if (c === '[') {
           seenBracket = true;
-         } else if (']' === c) {
+         } else if (c === ']') {
           seenBracket = false;
          }
          buffer += c;
@@ -4660,7 +4660,7 @@
        case 'port':
         if (/[0-9]/.test(c)) {
          buffer += c;
-        } else if (EOF === c || '/' === c || '\\' === c || '?' === c || '#' === c || stateOverride) {
+        } else if (c === EOF || c === '/' || c === '\\' || c === '?' || c === '#' || stateOverride) {
          if ('' !== buffer) {
           var temp = parseInt(buffer, 10);
           if (temp !== relative[this._scheme]) {
@@ -4673,14 +4673,14 @@
          }
          state = 'relative path start';
          continue;
-        } else if ('\t' === c || '\n' === c || '\r' === c) {
+        } else if (c === '\t' || c === '\n' || c === '\r') {
          err('Invalid code point in port: ' + c);
         } else {
          invalid.call(this);
         }
         break;
        case 'relative path start':
-        if ('\\' === c) {
+        if (c === '\\') {
          err('\'\\\' not allowed in path.');
         }
         state = 'relative path';
@@ -4689,32 +4689,32 @@
         }
         break;
        case 'relative path':
-        if (EOF === c || '/' === c || '\\' === c || !stateOverride && ('?' === c || '#' === c)) {
-         if ('\\' === c) {
+        if (c === EOF || c === '/' || c === '\\' || !stateOverride && (c === '?' || c === '#')) {
+         if (c === '\\') {
           err('\\ not allowed in relative path.');
          }
          var tmp;
          if (tmp = relativePathDotMapping[buffer.toLowerCase()]) {
           buffer = tmp;
          }
-         if ('..' === buffer) {
+         if (buffer === '..') {
           this._path.pop();
           if ('/' !== c && '\\' !== c) {
            this._path.push('');
           }
-         } else if ('.' === buffer && '/' !== c && '\\' !== c) {
+         } else if (buffer === '.' && '/' !== c && '\\' !== c) {
           this._path.push('');
          } else if ('.' !== buffer) {
-          if ('file' === this._scheme && this._path.length === 0 && buffer.length === 2 && ALPHA.test(buffer[0]) && buffer[1] === '|') {
+          if (this._scheme === 'file' && this._path.length === 0 && buffer.length === 2 && ALPHA.test(buffer[0]) && buffer[1] === '|') {
            buffer = buffer[0] + ':';
           }
           this._path.push(buffer);
          }
          buffer = '';
-         if ('?' === c) {
+         if (c === '?') {
           this._query = '?';
           state = 'query';
-         } else if ('#' === c) {
+         } else if (c === '#') {
           this._fragment = '#';
           state = 'fragment';
          }
@@ -4723,7 +4723,7 @@
         }
         break;
        case 'query':
-        if (!stateOverride && '#' === c) {
+        if (!stateOverride && c === '#') {
          this._fragment = '#';
          state = 'fragment';
         } else if (EOF !== c && '\t' !== c && '\n' !== c && '\r' !== c) {
@@ -4827,27 +4827,27 @@
       parse.call(this, pathname, 'relative path start');
      },
      get search() {
-      return this._isInvalid || !this._query || '?' === this._query ? '' : this._query;
+      return this._isInvalid || !this._query || this._query === '?' ? '' : this._query;
      },
      set search(search) {
       if (this._isInvalid || !this._isRelative) {
        return;
       }
       this._query = '?';
-      if ('?' === search[0]) {
+      if (search[0] === '?') {
        search = search.slice(1);
       }
       parse.call(this, search, 'query');
      },
      get hash() {
-      return this._isInvalid || !this._fragment || '#' === this._fragment ? '' : this._fragment;
+      return this._isInvalid || !this._fragment || this._fragment === '#' ? '' : this._fragment;
      },
      set hash(hash) {
       if (this._isInvalid) {
        return;
       }
       this._fragment = '#';
-      if ('#' === hash[0]) {
+      if (hash[0] === '#') {
        hash = hash.slice(1);
       }
       parse.call(this, hash, 'fragment');
@@ -5538,7 +5538,7 @@
      return createBidiText(str, isLTR);
     }
     if (startLevel === -1) {
-     if (strLength / numBidi < 0.3) {
+     if (numBidi / strLength < 0.3) {
       isLTR = true;
       startLevel = 0;
      } else {
@@ -6495,10 +6495,9 @@
         return (value - 247) * 256 + dict[pos++] + 108;
        } else if (value >= 251 && value <= 254) {
         return -((value - 251) * 256) - dict[pos++] - 108;
-       } else {
-        warn('CFFParser_parseDict: "' + value + '" is a reserved command.');
-        return NaN;
        }
+       warn('CFFParser_parseDict: "' + value + '" is a reserved command.');
+       return NaN;
       }
       function parseFloatOperand() {
        var str = '';
@@ -7780,9 +7779,8 @@
      encodeNumber: function CFFCompiler_encodeNumber(value) {
       if (parseFloat(value) === parseInt(value, 10) && !isNaN(value)) {
        return this.encodeInteger(value);
-      } else {
-       return this.encodeFloat(value);
       }
+      return this.encodeFloat(value);
      },
      encodeFloat: function CFFCompiler_encodeFloat(num) {
       var value = num.toString();
@@ -15070,12 +15068,11 @@
         return false;
        }
        return true;
-      } else {
-       if (!this.adobe && this.colorTransform === 1) {
-        return true;
-       }
-       return false;
       }
+      if (!this.adobe && this.colorTransform === 1) {
+       return true;
+      }
+      return false;
      },
      _convertYccToRgb: function convertYccToRgb(data) {
       var Y, Cb, Cr;
@@ -15159,9 +15156,8 @@
        if (this._isColorConversionNeeded()) {
         if (forceRGBoutput) {
          return this._convertYcckToRgb(data);
-        } else {
-         return this._convertYcckToCmyk(data);
         }
+        return this._convertYcckToCmyk(data);
        } else if (forceRGBoutput) {
         return this._convertCmykToRgb(data);
        }
@@ -24355,12 +24351,14 @@
      var inbits = 0, outbits = 0;
      var pos = bufferLength;
      var i;
-     if (bits === 1) {
+     if (bits === 1 && colors === 1) {
       for (i = 0; i < rowBytes; ++i) {
-       var c = rawBytes[i];
-       inbuf = inbuf << 8 | c;
-       buffer[pos++] = (c ^ inbuf >> colors) & 0xFF;
-       inbuf &= 0xFFFF;
+       var c = rawBytes[i] ^ inbuf;
+       c ^= c >> 1;
+       c ^= c >> 2;
+       c ^= c >> 4;
+       inbuf = (c & 1) << 7;
+       buffer[pos++] = c;
       }
      } else if (bits === 8) {
       for (i = 0; i < colors; ++i) {
@@ -34415,9 +34413,8 @@
         0
        ];
        return new TrueTypeCompiled(parseGlyfTable(glyf, loca, indexToLocFormat), cmap, fontMatrix);
-      } else {
-       return new Type2Compiled(cff, cmap, font.fontMatrix, font.glyphNameMap);
       }
+      return new Type2Compiled(cff, cmap, font.fontMatrix, font.glyphNameMap);
      }
     };
    }();
@@ -39026,7 +39023,7 @@
          var stackDelta = op <= 0x8E ? TTOpsStackDeltas[op] : op >= 0xC0 && op <= 0xDF ? -1 : op >= 0xE0 ? -2 : 0;
          if (op >= 0x71 && op <= 0x75) {
           n = stack.pop();
-          if (n === n) {
+          if (!isNaN(n)) {
            stackDelta = -n * 2;
           }
          }
@@ -39160,7 +39157,7 @@
       }
       var isTrueType = !tables['CFF '];
       if (!isTrueType) {
-       if (header.version === 'OTTO' && properties.type !== 'CIDFontType2' || !tables['head'] || !tables['hhea'] || !tables['maxp'] || !tables['post']) {
+       if (header.version === 'OTTO' && !properties.composite || !tables['head'] || !tables['hhea'] || !tables['maxp'] || !tables['post']) {
         cffFile = new Stream(tables['CFF '].data);
         cff = new CFFFont(cffFile, properties);
         adjustWidths(properties);
@@ -39262,7 +39259,7 @@
        }
        return false;
       }
-      if (properties.type === 'CIDFontType2') {
+      if (properties.composite) {
        var cidToGidMap = properties.cidToGidMap || [];
        var isCidToGidMapEmpty = cidToGidMap.length === 0;
        properties.cMap.forEach(function (charCode, cid) {
@@ -42164,11 +42161,13 @@
      }
     }
     function fn_g(x) {
+     var result;
      if (x >= 6 / 29) {
-      return x * x * x;
+      result = x * x * x;
      } else {
-      return 108 / 841 * (x - 4 / 29);
+      result = 108 / 841 * (x - 4 / 29);
      }
+     return result;
     }
     function decode(value, high1, low2, high2) {
      return low2 + value * (high2 - low2) / high1;
@@ -42250,9 +42249,8 @@
     function handleImageData(image, nativeDecoder) {
      if (nativeDecoder && nativeDecoder.canDecode(image)) {
       return nativeDecoder.decode(image);
-     } else {
-      return Promise.resolve(image);
      }
+     return Promise.resolve(image);
     }
     function decodeAndClamp(value, addend, coefficient, max) {
      value = addend + value * coefficient;
@@ -43324,12 +43322,12 @@
     return Catalog;
    }();
    var XRef = function XRefClosure() {
-    function XRef(stream, password) {
+    function XRef(stream, pdfManager) {
      this.stream = stream;
+     this.pdfManager = pdfManager;
      this.entries = [];
      this.xrefstms = Object.create(null);
      this.cache = [];
-     this.password = password;
      this.stats = {
       streamTypes: [],
       fontTypes: []
@@ -43350,11 +43348,11 @@
       trailerDict.assignXref(this);
       this.trailer = trailerDict;
       var encrypt = trailerDict.get('Encrypt');
-      if (encrypt) {
+      if (isDict(encrypt)) {
        var ids = trailerDict.get('ID');
        var fileId = ids && ids.length ? ids[0] : '';
        encrypt.suppressEncryption = true;
-       this.encrypt = new CipherTransformFactory(encrypt, fileId, this.password);
+       this.encrypt = new CipherTransformFactory(encrypt, fileId, this.pdfManager.password);
       }
       if (!(this.root = trailerDict.get('Root'))) {
        error('Invalid root reference');
@@ -44004,9 +44002,8 @@
       return dict.get('Mac');
      } else if (dict.has('DOS')) {
       return dict.get('DOS');
-     } else {
-      return null;
      }
+     return null;
     }
     FileSpec.prototype = {
      get filename() {
@@ -45109,13 +45106,12 @@
      var cs = ColorSpace.parse(dict.get('ColorSpace', 'CS'), xref, res);
      return (cs.numComps === 1 || cs.numComps === 3) && cs.isDefaultDecode(dict.getArray('Decode', 'D'));
     };
-    function PartialEvaluator(pdfManager, xref, handler, pageIndex, uniquePrefix, idCounters, fontCache, options) {
+    function PartialEvaluator(pdfManager, xref, handler, pageIndex, idFactory, fontCache, options) {
      this.pdfManager = pdfManager;
      this.xref = xref;
      this.handler = handler;
      this.pageIndex = pageIndex;
-     this.uniquePrefix = uniquePrefix;
-     this.idCounters = idCounters;
+     this.idFactory = idFactory;
      this.fontCache = fontCache;
      this.options = options || DefaultPartialEvaluatorOptions;
     }
@@ -45278,8 +45274,7 @@
        operatorList.addOp(OPS.paintInlineImageXObject, [imgData]);
        return;
       }
-      var uniquePrefix = this.uniquePrefix || '';
-      var objId = 'img_' + uniquePrefix + ++this.idCounters.obj;
+      var objId = 'img_' + this.idFactory.createObjId();
       operatorList.addDependency(objId);
       args = [
        objId,
@@ -45563,7 +45558,7 @@
        this.fontCache.put(fontRef, fontCapability.promise);
       } else {
        if (!fontID) {
-        fontID = (this.uniquePrefix || 'F_') + ++this.idCounters.obj;
+        fontID = this.idFactory.createObjId();
        }
        this.fontCache.put('id_' + fontID, fontCapability.promise);
       }
@@ -45629,9 +45624,8 @@
         pattern = Pattern.parseShading(shading, matrix, xref, resources, this.handler);
         operatorList.addOp(fn, pattern.getIR());
         return Promise.resolve();
-       } else {
-        return Promise.reject('Unknown PatternType: ' + typeNum);
        }
+       return Promise.reject('Unknown PatternType: ' + typeNum);
       }
       operatorList.addOp(fn, args);
       return Promise.resolve();
@@ -46712,7 +46706,16 @@
          } else if (isRef(entry)) {
           hash.update(entry.toString());
          } else if (isArray(entry)) {
-          hash.update(entry.length.toString());
+          var diffLength = entry.length, diffBuf = new Array(diffLength);
+          for (var j = 0; j < diffLength; j++) {
+           var diffEntry = entry[j];
+           if (isName(diffEntry)) {
+            diffBuf[j] = diffEntry.name;
+           } else if (isNum(diffEntry) || isRef(diffEntry)) {
+            diffBuf[j] = diffEntry.toString();
+           }
+          }
+          hash.update(diffBuf.join());
          }
         }
        }
@@ -47576,17 +47579,16 @@
         operation.fn = fn;
         operation.args = args;
         return true;
-       } else {
-        if (isEOF(obj)) {
-         return false;
+       }
+       if (isEOF(obj)) {
+        return false;
+       }
+       if (obj !== null) {
+        if (args === null) {
+         args = [];
         }
-        if (obj !== null) {
-         if (args === null) {
-          args = [];
-         }
-         args.push(obj);
-         assert(args.length <= 33, 'Too many arguments');
-        }
+        args.push(obj);
+        assert(args.length <= 33, 'Too many arguments');
        }
       }
      },
@@ -47961,12 +47963,12 @@
    function AnnotationFactory() {
    }
    AnnotationFactory.prototype = {
-    create: function AnnotationFactory_create(xref, ref, pdfManager, uniquePrefix, idCounters) {
+    create: function AnnotationFactory_create(xref, ref, pdfManager, idFactory) {
      var dict = xref.fetchIfRef(ref);
      if (!isDict(dict)) {
       return;
      }
-     var id = isRef(ref) ? ref.toString() : 'annot_' + (uniquePrefix || '') + ++idCounters.obj;
+     var id = isRef(ref) ? ref.toString() : 'annot_' + idFactory.createObjId();
      var subtype = dict.get('Subtype');
      subtype = isName(subtype) ? subtype.name : null;
      var parameters = {
@@ -48666,10 +48668,15 @@
      this.xref = xref;
      this.ref = ref;
      this.fontCache = fontCache;
-     this.uniquePrefix = 'p' + this.pageIndex + '_';
-     this.idCounters = { obj: 0 };
      this.evaluatorOptions = pdfManager.evaluatorOptions;
      this.resourcesPromise = null;
+     var uniquePrefix = 'p' + this.pageIndex + '_';
+     var idCounters = { obj: 0 };
+     this.idFactory = {
+      createObjId: function () {
+       return uniquePrefix + ++idCounters.obj;
+      }
+     };
     }
     Page.prototype = {
      getPageProp: function Page_getPageProp(key) {
@@ -48786,7 +48793,7 @@
        'XObject',
        'Font'
       ]);
-      var partialEvaluator = new PartialEvaluator(pdfManager, this.xref, handler, this.pageIndex, this.uniquePrefix, this.idCounters, this.fontCache, this.evaluatorOptions);
+      var partialEvaluator = new PartialEvaluator(pdfManager, this.xref, handler, this.pageIndex, this.idFactory, this.fontCache, this.evaluatorOptions);
       var dataPromises = Promise.all([
        contentStreamPromise,
        resourcesPromise
@@ -48842,7 +48849,7 @@
       ]);
       return dataPromises.then(function (data) {
        var contentStream = data[0];
-       var partialEvaluator = new PartialEvaluator(pdfManager, self.xref, handler, self.pageIndex, self.uniquePrefix, self.idCounters, self.fontCache, self.evaluatorOptions);
+       var partialEvaluator = new PartialEvaluator(pdfManager, self.xref, handler, self.pageIndex, self.idFactory, self.fontCache, self.evaluatorOptions);
        return partialEvaluator.getTextContent(contentStream, task, self.resources, null, normalizeWhitespace, combineTextItems);
       });
      },
@@ -48865,7 +48872,7 @@
       var annotationFactory = new AnnotationFactory();
       for (var i = 0, n = annotationRefs.length; i < n; ++i) {
        var annotationRef = annotationRefs[i];
-       var annotation = annotationFactory.create(this.xref, annotationRef, this.pdfManager, this.uniquePrefix, this.idCounters);
+       var annotation = annotationFactory.create(this.xref, annotationRef, this.pdfManager, this.idFactory);
        if (annotation) {
         annotations.push(annotation);
        }
@@ -48878,21 +48885,19 @@
    var PDFDocument = function PDFDocumentClosure() {
     var FINGERPRINT_FIRST_BYTES = 1024;
     var EMPTY_FINGERPRINT = '\x00\x00\x00\x00\x00\x00\x00' + '\x00\x00\x00\x00\x00\x00\x00\x00\x00';
-    function PDFDocument(pdfManager, arg, password) {
+    function PDFDocument(pdfManager, arg) {
+     var stream;
      if (isStream(arg)) {
-      init.call(this, pdfManager, arg, password);
+      stream = arg;
      } else if (isArrayBuffer(arg)) {
-      init.call(this, pdfManager, new Stream(arg), password);
+      stream = new Stream(arg);
      } else {
       error('PDFDocument: Unknown argument type');
      }
-    }
-    function init(pdfManager, stream, password) {
      assert(stream.length > 0, 'stream must have data');
      this.pdfManager = pdfManager;
      this.stream = stream;
-     var xref = new XRef(this.stream, password, pdfManager);
-     this.xref = xref;
+     this.xref = new XRef(stream, pdfManager);
     }
     function find(stream, needle, limit, backwards) {
      var pos = stream.pos;
@@ -49125,6 +49130,9 @@
      get docId() {
       return this._docId;
      },
+     get password() {
+      return this._password;
+     },
      get docBaseUrl() {
       var docBaseUrl = null;
       if (this._docBaseUrl) {
@@ -49168,14 +49176,7 @@
       return new NotImplementedException();
      },
      updatePassword: function BasePdfManager_updatePassword(password) {
-      this.pdfDocument.xref.password = this.password = password;
-      if (this._passwordChangedCapability) {
-       this._passwordChangedCapability.resolve();
-      }
-     },
-     passwordChanged: function BasePdfManager_passwordChanged() {
-      this._passwordChangedCapability = createPromiseCapability();
-      return this._passwordChangedCapability.promise;
+      this._password = password;
      },
      terminate: function BasePdfManager_terminate() {
       return new NotImplementedException();
@@ -49186,10 +49187,11 @@
    var LocalPdfManager = function LocalPdfManagerClosure() {
     function LocalPdfManager(docId, data, password, evaluatorOptions, docBaseUrl) {
      this._docId = docId;
+     this._password = password;
      this._docBaseUrl = docBaseUrl;
      this.evaluatorOptions = evaluatorOptions;
      var stream = new Stream(data);
-     this.pdfDocument = new PDFDocument(this, stream, password);
+     this.pdfDocument = new PDFDocument(this, stream);
      this._loadedStreamCapability = createPromiseCapability();
      this._loadedStreamCapability.resolve(stream);
     }
@@ -49214,13 +49216,11 @@
       return Promise.resolve();
      },
      requestLoadedStream: function LocalPdfManager_requestLoadedStream() {
-      return;
      },
      onLoadedStream: function LocalPdfManager_onLoadedStream() {
       return this._loadedStreamCapability.promise;
      },
      terminate: function LocalPdfManager_terminate() {
-      return;
      }
     });
     return LocalPdfManager;
@@ -49228,6 +49228,7 @@
    var NetworkPdfManager = function NetworkPdfManagerClosure() {
     function NetworkPdfManager(docId, pdfNetworkStream, args, evaluatorOptions, docBaseUrl) {
      this._docId = docId;
+     this._password = args.password;
      this._docBaseUrl = docBaseUrl;
      this.msgHandler = args.msgHandler;
      this.evaluatorOptions = evaluatorOptions;
@@ -49239,7 +49240,7 @@
       rangeChunkSize: args.rangeChunkSize
      };
      this.streamManager = new ChunkedStreamManager(pdfNetworkStream, params);
-     this.pdfDocument = new PDFDocument(this, this.streamManager.getStream(), args.password);
+     this.pdfDocument = new PDFDocument(this, this.streamManager.getStream());
     }
     Util.inherit(NetworkPdfManager, BasePdfManager, {
      ensure: function NetworkPdfManager_ensure(obj, prop, args) {
@@ -49741,18 +49742,23 @@
       };
       return pdfManagerCapability.promise;
      }
-     var setupDoc = function (data) {
-      var onSuccess = function (doc) {
+     function setupDoc(data) {
+      function onSuccess(doc) {
        ensureNotTerminated();
        handler.send('GetDoc', { pdfInfo: doc });
-      };
-      var onFailure = function (e) {
+      }
+      function onFailure(e) {
        if (e instanceof PasswordException) {
-        if (e.code === PasswordResponses.NEED_PASSWORD) {
-         handler.send('NeedPassword', e);
-        } else if (e.code === PasswordResponses.INCORRECT_PASSWORD) {
-         handler.send('IncorrectPassword', e);
-        }
+        var task = new WorkerTask('PasswordException: response ' + e.code);
+        startWorkerTask(task);
+        handler.sendWithPromise('PasswordRequest', e).then(function (data) {
+         finishWorkerTask(task);
+         pdfManager.updatePassword(data.password);
+         pdfManagerReady();
+        }).catch(function (ex) {
+         finishWorkerTask(task);
+         handler.send('PasswordException', ex);
+        }.bind(null, e));
        } else if (e instanceof InvalidPDFException) {
         handler.send('InvalidPDF', e);
        } else if (e instanceof MissingPDFException) {
@@ -49762,7 +49768,22 @@
        } else {
         handler.send('UnknownError', new UnknownErrorException(e.message, e.toString()));
        }
-      };
+      }
+      function pdfManagerReady() {
+       ensureNotTerminated();
+       loadDocument(false).then(onSuccess, function loadFailure(ex) {
+        ensureNotTerminated();
+        if (!(ex instanceof XRefParseException)) {
+         onFailure(ex);
+         return;
+        }
+        pdfManager.requestLoadedStream();
+        pdfManager.onLoadedStream().then(function () {
+         ensureNotTerminated();
+         loadDocument(true).then(onSuccess, onFailure);
+        });
+       }, onFailure);
+      }
       ensureNotTerminated();
       var cMapOptions = {
        url: data.cMapUrl === undefined ? null : data.cMapUrl,
@@ -49784,25 +49805,8 @@
        pdfManager.onLoadedStream().then(function (stream) {
         handler.send('DataLoaded', { length: stream.bytes.byteLength });
        });
-      }).then(function pdfManagerReady() {
-       ensureNotTerminated();
-       loadDocument(false).then(onSuccess, function loadFailure(ex) {
-        ensureNotTerminated();
-        if (!(ex instanceof XRefParseException)) {
-         if (ex instanceof PasswordException) {
-          pdfManager.passwordChanged().then(pdfManagerReady);
-         }
-         onFailure(ex);
-         return;
-        }
-        pdfManager.requestLoadedStream();
-        pdfManager.onLoadedStream().then(function () {
-         ensureNotTerminated();
-         loadDocument(true).then(onSuccess, onFailure);
-        });
-       }, onFailure);
-      }, onFailure);
-     };
+      }).then(pdfManagerReady, onFailure);
+     }
      handler.on('GetPage', function wphSetupGetPage(data) {
       return pdfManager.getPage(data.pageIndex).then(function (page) {
        var rotatePromise = pdfManager.ensure(page, 'rotate');
@@ -49861,9 +49865,6 @@
      });
      handler.on('GetStats', function wphSetupGetStats(data) {
       return pdfManager.pdfDocument.xref.stats;
-     });
-     handler.on('UpdatePassword', function wphSetupUpdatePassword(data) {
-      pdfManager.updatePassword(data);
      });
      handler.on('GetAnnotations', function wphSetupGetAnnotations(data) {
       return pdfManager.getPage(data.pageIndex).then(function (page) {

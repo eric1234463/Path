@@ -190,14 +190,18 @@ angular.module('digestHud', [])
 
     $provide.decorator('$rootScope', ['$delegate', function($delegate) {
       var proto = Object.getPrototypeOf($delegate);
-      var originalDigest = proto.$digest;
+      var originalDigest = proto.$digest.original || proto.$digest;
       var originalEvalAsync = proto.$evalAsync;
       var originalApplyAsync = proto.$applyAsync;
       var originalPostDigest = proto.$$postDigest;
       var originalWatch = proto.$watch;
       var originalWatchGroup = proto.$watchGroup;
       // $watchCollection delegates to $watch, no extra processing necessary
-      proto.$digest = instrumentedDigest;
+      if (proto.$digest.original) {
+        proto.$digest.original = instrumentedDigest;
+      } else {
+        proto.$digest = instrumentedDigest;
+      }
       proto.$evalAsync = instrumentedEvalAsync;
       proto.$applyAsync = instrumentedApplyAsync;
       proto.$$postDigest = instrumentedPostDigest;
@@ -263,9 +267,6 @@ angular.module('digestHud', [])
         }
         try {
           if (angular.isString(watchExpression)) {
-            if (!$parse) {
-              angular.injector(['ng']).invoke(['$parse', function(parse) {$parse = parse;}]);
-            }
             watchExpression = $parse(watchExpression);
           }
           if (watchExpression && watchExpression.$$watchDelegate) {
@@ -301,6 +302,7 @@ angular.module('digestHud', [])
     }]);
 
     $provide.decorator('$parse', ['$delegate', function($delegate) {
+      $parse = $delegate;
       return function(expression) {
         var result = $delegate.apply(this, arguments);
         if (angular.isString(expression)) result.exp = expression;
@@ -388,7 +390,6 @@ angular.module('digestHud', [])
 
   function wrapExpression(expression, timing, counter, flushCycle, endCycle) {
     if (!expression && !flushCycle) return expression;
-    if (!$parse) angular.injector(['ng']).invoke(['$parse', function(parse) {$parse = parse;}]);
     var actualExpression = angular.isString(expression) ? $parse(expression) : expression;
     return function instrumentedExpression() {
       if (flushCycle) flushTimingCycle();
@@ -425,4 +426,3 @@ angular.module('digestHud', [])
 
   this.$get = function() {};
 }]);
-
