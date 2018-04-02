@@ -4,15 +4,15 @@ angular
 
         return {
             getSchoolList: function() {
-                var query = $http.get('http://unicomhk.net/path2/php/signup.php?action=getSchoolList');
+                var query = $http.get('http://erickwong.hk/path2/php/signup.php?action=getSchoolList');
                 return query;
             },
             getProgramList: function(schoolID) {
-                var query = $http.get('http://unicomhk.net/path2/php/signup.php?action=getProgramList&schoolID=' + schoolID);
+                var query = $http.get('http://erickwong.hk/path2/php/signup.php?action=getProgramList&schoolID=' + schoolID);
                 return query;
             }, 
             getAccountList:function(){
-                var query = $http.get('http://unicomhk.net/path2/php/signup.php?action=getAccountList');
+                var query = $http.get('http://erickwong.hk/path2/php/signup.php?action=getAccountList');
                 return query;
             }
       

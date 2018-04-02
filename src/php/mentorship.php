@@ -7,7 +7,7 @@ date_default_timezone_set("Asia/Hong_Kong");
 $dbconn = dbconn();
 if (!$dbconn) {
     die("dbconnection failed: " . mysqli_dbconnect_error());
-} 
+}
 else {
 	$action = $_GET['action'];
 	$data = Array();
@@ -66,7 +66,7 @@ else {
 							'off' => $off,
 						);
 			}
-			echo json_encode($data);		
+			echo json_encode($data);
 			break;
 
 		case 'mkAppointment':
@@ -106,8 +106,8 @@ else {
 							mysqli_query($dbconn, $sql2);
 							echo 1; // join into existing meeting
 							break;
-						} 
-					
+						}
+
 
 				} else {
 					echo 0; // back to create appoint
@@ -156,7 +156,7 @@ else {
 							'meetingDate' => $meetingDate,
 							'meetingTime' => $meetingTime,
 							'participant' => $participant
-						);	
+						);
 			}
 			echo json_encode($data);
 			break;
@@ -231,7 +231,7 @@ else {
 				$date = $row['appointDate'];
 				$start = $row['appointTime'];
 				$end = date('h:i:s', strtotime($start)+ 60*60);
-	
+
 				$sql2 = "INSERT INTO Meeting (meetingDate, meetingStartTime,meetingEndTime, mentorID) VALUES ('$date','$start', '$end',$mID)";
 				mysqli_query($dbconn, $sql2);
 			}
@@ -279,7 +279,7 @@ else {
 			$result = mysqli_query($dbconn, $sql);
 			while ($row = mysqli_fetch_assoc($result)) {
 				$data[] = array(
-					'noteName' => $row['noteName'], 
+					'noteName' => $row['noteName'],
 					'noteLocation'=>$row['noteLocation'],
 					'noteDesc' => $row['noteDesc'],
 					'noteCreateDt' => $row['noteCreateDt']
@@ -299,7 +299,7 @@ else {
 				-H-i-s");
 			$temp = explode(".", $_FILES["file"]["name"]);
 			$newfilename =  $noteName . "_" . $today . '.' . end($temp);
-			$path = 'http://unicomhk.net/path2/pdf/' . $newfilename;
+			$path = 'http://erickwong.hk/path2/pdf/' . $newfilename;
 			move_uploaded_file($_FILES["file"]["tmp_name"], $destination . $newfilename);
 
 			$sql = "INSERT INTO Note(mentorID,noteName,noteDesc,noteLocation,noteCreateDt) VALUES ('$mentorID','$noteName','$noteDesc','$path',NOW())";

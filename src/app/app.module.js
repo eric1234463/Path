@@ -15,7 +15,7 @@
         ]).config(function($sceDelegateProvider) {
              $sceDelegateProvider.resourceUrlWhitelist([
                 'self',
-                'http://unicomhk.net/**'
+                'http://erickwong.hk/**'
             ])
         })
 

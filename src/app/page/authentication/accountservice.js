@@ -4,7 +4,7 @@ angular
 
         return {
             loginChecker: function(AccountName, AccountPassword) {
-                var query = $http.get('http://unicomhk.net/path2/php/account.php?action=checkLogin&AccountName=' + AccountName + '&AccountPassword=' + AccountPassword);
+                var query = $http.get('http://erickwong.hk/path2/php/account.php?action=checkLogin&AccountName=' + AccountName + '&AccountPassword=' + AccountPassword);
                 return query;
             },
 
@@ -56,18 +56,18 @@ angular
             },
 
             updatePassword: function(AccountID, AccountPassword) {
-                var query = $http.get('http://unicomhk.net/path2/php/account.php?action=updatePassword&AccountID=' + AccountID + '&AccountPassword=' + AccountPassword);
+                var query = $http.get('http://erickwong.hk/path2/php/account.php?action=updatePassword&AccountID=' + AccountID + '&AccountPassword=' + AccountPassword);
                 return query;
             },
 
             checkPassword: function(AccountID, AccountPassword) {
-                var query = $http.get('http://unicomhk.net/path2/php/account.php?action=checkPassword&AccountID=' + AccountID + '&AccountPassword=' + AccountPassword);
+                var query = $http.get('http://erickwong.hk/path2/php/account.php?action=checkPassword&AccountID=' + AccountID + '&AccountPassword=' + AccountPassword);
                 return query;
             },
 
 
             uploadIcon: function() {
-                $http.get('http://unicomhk.net/path2/php/account.php?action=uploadIcon');
+                $http.get('http://erickwong.hk/path2/php/account.php?action=uploadIcon');
             },
 
             checkMenu: function() {
@@ -87,19 +87,19 @@ angular
 
             },
             updatePersonalInfo: function(AccountID, userName, cgpa, myData) {
-                $http.get('http://unicomhk.net/path2/php/account.php?action=updatePersonalInfo&AccountID=' + AccountID + '&userName=' + userName + '&cgpa=' + cgpa + '&myData=' + myData);
+                $http.get('http://erickwong.hk/path2/php/account.php?action=updatePersonalInfo&AccountID=' + AccountID + '&userName=' + userName + '&cgpa=' + cgpa + '&myData=' + myData);
             },
 
             setReadNotification:function(notification){
-                $http.get('http://unicomhk.net/path2/php/account.php?action=setReadNotification&notificationID=' +notification.notificationID);
+                $http.get('http://erickwong.hk/path2/php/account.php?action=setReadNotification&notificationID=' +notification.notificationID);
             },
 
             logout: function(uID){
-                $http.get('http://unicomhk.net/path2/php/account.php?action=logout&uID=' + uID);
+                $http.get('http://erickwong.hk/path2/php/account.php?action=logout&uID=' + uID);
             },
 
             request : function(acID) {
-                $http.get('http://unicomhk.net/path2/php/account.php?action=request&acID=' + acID);
+                $http.get('http://erickwong.hk/path2/php/account.php?action=request&acID=' + acID);
             },
 
         };

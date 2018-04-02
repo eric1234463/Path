@@ -119,7 +119,7 @@
 
         function uploadPic(file) {
             Upload.upload({
-                url: 'http://unicomhk.net/path2/php/account.php?action=uploadIcon',
+                url: 'http://erickwong.hk/path2/php/account.php?action=uploadIcon',
                 method: 'POST',
                 data: {
                     'userID': vm.currentUser.accountID,

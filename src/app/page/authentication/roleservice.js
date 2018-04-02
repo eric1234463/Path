@@ -12,7 +12,7 @@
         return RoleService;
 
         function setPermission() {
-            $http.get('http://unicomhk.net/path2/php/account.php?action=getRole').then(function(response) {
+            $http.get('http://erickwong.hk/path2/php/account.php?action=getRole').then(function(response) {
                 $localStorage.permissions = response.data.Permissions;
                 $localStorage.userRoles = response.data.UserRoles;
                 PermissionStore.defineManyPermissions($localStorage.permissions, function(permissionName) {

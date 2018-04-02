@@ -119,12 +119,12 @@
                 i++;
             }
             vm.showAlert();
-            $http.get('http://unicomhk.net/path2/php/signup.php?action=sendMail&pin=' + vm.user.pinCode + '&email=' + vm.user.email);
+            $http.get('http://erickwong.hk/path2/php/signup.php?action=sendMail&pin=' + vm.user.pinCode + '&email=' + vm.user.email);
         }
 
         function createAccount() {
             vm.nextStep();
-            $http.get('http://unicomhk.net/path2/php/signup.php?action=createAccount&name=' + vm.user.name + '&schoolID=' + vm.user.school + '&programID=' + vm.user.program + '&password=' + vm.user.password + '&email=' + vm.user.email);
+            $http.get('http://erickwong.hk/path2/php/signup.php?action=createAccount&name=' + vm.user.name + '&schoolID=' + vm.user.school + '&programID=' + vm.user.program + '&password=' + vm.user.password + '&email=' + vm.user.email);
         }
 
         function checkAccount() {

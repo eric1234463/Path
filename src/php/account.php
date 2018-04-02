@@ -6,7 +6,7 @@ header('Content-Type: application/json');
 $dbconn = dbconn();
 if (!$dbconn) {
 	die("dbconnection failed: " . mysqli_dbconnect_error());
-} 
+}
 else {
 	$action = $_GET['action'];
 	$data = Array();
@@ -87,7 +87,7 @@ else {
 				$title = $senderUsername." ".$notificationMessage;
 				$notifications[] = array(
 					'notificationID' => $row2['notificationID'],
-					'title' => $title, 
+					'title' => $title,
 					'date' => $notificationTime,
 					'path' => $row2['path'],
 					'read' => $row2['read'],
@@ -100,7 +100,7 @@ else {
 				$sql4 = "UPDATE Account SET loginStatus = 1 WHERE accountID = $accountID";
 				mysqli_query($dbconn, $sql4);
 				$data= array(
-					'status' => "true", 
+					'status' => "true",
 					'accountID'=> $accountID,
 					'displayName'=> $userName,
 					'username' => $userName,
@@ -173,20 +173,20 @@ else {
 
 		case 'checkPassword':
 		$AccountID = $_GET['AccountID'];
-		$AccountPassword = $_GET['AccountPassword'];	
+		$AccountPassword = $_GET['AccountPassword'];
 		$sql = "SELECT * FROM Account WHERE accountID = '$AccountID'";
-		$result = mysqli_query($dbconn, $sql);	  
+		$result = mysqli_query($dbconn, $sql);
 		while ($row = mysqli_fetch_assoc($result)) {
 			if (password_verify($AccountPassword, $row['password'])){
 				$data= array(
-					'status' => "true", 
+					'status' => "true",
 					);
 			}
 			else{
 				$data= array('status' => "false");
 			}
 			echo json_encode($data);
-		}  
+		}
 		break;
 
 		case 'updatePersonalInfo':
@@ -203,7 +203,7 @@ else {
 			$sql3 = "INSERT INTO AccountSkills (accountID, skill) VALUES ('$AccountID','$data')";
 			$result = mysqli_query($dbconn, $sql3);
 		}
-		break;   
+		break;
 
 		case 'uploadIcon':
 		$filename = $_FILES['file']['name'];
@@ -215,7 +215,7 @@ else {
 		$ext = pathinfo($filename, PATHINFO_EXTENSION);
 		if($ext == 'jpg' || $ext == 'png'){
 		$newfilename =  $userID . "_" . $today . '.' . end($temp);
-		$path = 'http://unicomhk.net/path2/img/avatar/' . $newfilename;
+		$path = 'http://erickwong.hk/path2/img/avatar/' . $newfilename;
 		move_uploaded_file($_FILES["file"]["tmp_name"], $destination . $newfilename);
 		$sql = "UPDATE Account SET accountIcon = '$path' WHERE accountID = '$userID'";
 		$result = mysqli_query($dbconn, $sql);

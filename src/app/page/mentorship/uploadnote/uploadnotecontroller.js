@@ -17,7 +17,7 @@
         function submit() {
             console.log(vm.file);
             Upload.upload({
-                url: 'http://unicomhk.net/path2/php/mentorship.php?action=uploadNote',
+                url: 'http://erickwong.hk/path2/php/mentorship.php?action=uploadNote',
                 method: 'POST',
                 data: {
                     'noteName': vm.noteName,
